@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess
 import os
 import time
@@ -65,18 +67,28 @@ replace_xml_dict['IS_PUPPI']  = do_puppi_str
 
 
 ###MACROS FOR SR
-# ModuleRunner.CreateMacroPrerequisites()
-# ModuleRunner.SetupMacros()
-# ModuleRunner.CompileMacros()
+ModuleRunner.CreateMacroPrerequisites()
+ModuleRunner.SetupMacros()
+ModuleRunner.CompileMacros()
 # ModuleRunner.RunMacros('CalculateReconstructionQuality')
 # ModuleRunner.RunMacros('CalculateChi2Values')
-ModuleRunner.RunMacros('ProduceThetaHistograms')
-ModuleRunner.RunTheta()
+# ModuleRunner.RunMacros('CalculateBackgroundComposition')
+# ModuleRunner.RunMacros('ProduceThetaHistograms')
+# ModuleRunner.RunMacros('ProduceThetaDNNHistograms')
+# ModuleRunner.RunTheta()
 # These need theta to run before executing them
-ModuleRunner.RunMacros('PlotLimits')
+# ModuleRunner.RunMacros('PlotLimits')
 # ModuleRunner.RunMacros('PlotPostfitDistributions')
-ModuleRunner.RunMacros('PlotPostfitParameters')
+# ModuleRunner.RunMacros('PlotPostfitParameters')
+# ModuleRunner.RunMacros('CalculateDNNEfficiencies')
+# ModuleRunner.RunMacros('CalculateDNNOutputCuts')
+# ModuleRunner.RunMacros('CompareShapes')
+ModuleRunner.RunMacros('FitDistributions')
+# ModuleRunner.RunMacros('ExtrapolateData')
 # Plotter
-ModuleRunner.CreateSteerfile(True)
-ModuleRunner.RunPlotter(False)
-ModuleRunner.RunPlotter(True)
+# ModuleRunner.CreateSteerfile(True)
+# ModuleRunner.RunPlotter(False)
+# ModuleRunner.RunPlotter(True)
+
+# ModuleRunner.ReadoutMLVariables()
+# ModuleRunner.ReadoutMLVariablesReduced()

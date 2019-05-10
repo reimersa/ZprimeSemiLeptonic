@@ -10,6 +10,1002 @@ using namespace std;
 using namespace uhh2;
 
 
+ZprimeHandleBuilder::ZprimeHandleBuilder(uhh2::Context& ctx){
+  h_eventweight   = ctx.declare_event_output< float >("eventweight");
+  h_n_jets        = ctx.declare_event_output< int   >("n_jets");
+  h_px_jet1       = ctx.declare_event_output< float >("px_jet1");
+  h_px_jet2       = ctx.declare_event_output< float >("px_jet2");
+  h_px_jet3       = ctx.declare_event_output< float >("px_jet3");
+  h_px_jet4       = ctx.declare_event_output< float >("px_jet4");
+  h_px_jet5       = ctx.declare_event_output< float >("px_jet5");
+  h_px_jet6       = ctx.declare_event_output< float >("px_jet6");
+  h_px_jet7       = ctx.declare_event_output< float >("px_jet7");
+  h_px_jet8       = ctx.declare_event_output< float >("px_jet8");
+  h_px_jet9       = ctx.declare_event_output< float >("px_jet9");
+  h_px_jet10      = ctx.declare_event_output< float >("px_jet10");
+  h_py_jet1       = ctx.declare_event_output< float >("py_jet1");
+  h_py_jet2       = ctx.declare_event_output< float >("py_jet2");
+  h_py_jet3       = ctx.declare_event_output< float >("py_jet3");
+  h_py_jet4       = ctx.declare_event_output< float >("py_jet4");
+  h_py_jet5       = ctx.declare_event_output< float >("py_jet5");
+  h_py_jet6       = ctx.declare_event_output< float >("py_jet6");
+  h_py_jet7       = ctx.declare_event_output< float >("py_jet7");
+  h_py_jet8       = ctx.declare_event_output< float >("py_jet8");
+  h_py_jet9       = ctx.declare_event_output< float >("py_jet9");
+  h_py_jet10      = ctx.declare_event_output< float >("py_jet10");
+  h_pz_jet1       = ctx.declare_event_output< float >("pz_jet1");
+  h_pz_jet2       = ctx.declare_event_output< float >("pz_jet2");
+  h_pz_jet3       = ctx.declare_event_output< float >("pz_jet3");
+  h_pz_jet4       = ctx.declare_event_output< float >("pz_jet4");
+  h_pz_jet5       = ctx.declare_event_output< float >("pz_jet5");
+  h_pz_jet6       = ctx.declare_event_output< float >("pz_jet6");
+  h_pz_jet7       = ctx.declare_event_output< float >("pz_jet7");
+  h_pz_jet8       = ctx.declare_event_output< float >("pz_jet8");
+  h_pz_jet9       = ctx.declare_event_output< float >("pz_jet9");
+  h_pz_jet10      = ctx.declare_event_output< float >("pz_jet10");
+  h_e_jet1       = ctx.declare_event_output< float >("e_jet1");
+  h_e_jet2       = ctx.declare_event_output< float >("e_jet2");
+  h_e_jet3       = ctx.declare_event_output< float >("e_jet3");
+  h_e_jet4       = ctx.declare_event_output< float >("e_jet4");
+  h_e_jet5       = ctx.declare_event_output< float >("e_jet5");
+  h_e_jet6       = ctx.declare_event_output< float >("e_jet6");
+  h_e_jet7       = ctx.declare_event_output< float >("e_jet7");
+  h_e_jet8       = ctx.declare_event_output< float >("e_jet8");
+  h_e_jet9       = ctx.declare_event_output< float >("e_jet9");
+  h_e_jet10      = ctx.declare_event_output< float >("e_jet10");
+
+  h_pt_jet1       = ctx.declare_event_output< float >("pt_jet1");
+  h_pt_jet2       = ctx.declare_event_output< float >("pt_jet2");
+  h_pt_jet3       = ctx.declare_event_output< float >("pt_jet3");
+  h_pt_jet4       = ctx.declare_event_output< float >("pt_jet4");
+  h_pt_jet5       = ctx.declare_event_output< float >("pt_jet5");
+  h_pt_jet6       = ctx.declare_event_output< float >("pt_jet6");
+  h_pt_jet7       = ctx.declare_event_output< float >("pt_jet7");
+  h_pt_jet8       = ctx.declare_event_output< float >("pt_jet8");
+  h_pt_jet9       = ctx.declare_event_output< float >("pt_jet9");
+  h_pt_jet10      = ctx.declare_event_output< float >("pt_jet10");
+  h_eta_jet1      = ctx.declare_event_output< float >("eta_jet1");
+  h_eta_jet2      = ctx.declare_event_output< float >("eta_jet2");
+  h_eta_jet3      = ctx.declare_event_output< float >("eta_jet3");
+  h_eta_jet4      = ctx.declare_event_output< float >("eta_jet4");
+  h_eta_jet5      = ctx.declare_event_output< float >("eta_jet5");
+  h_eta_jet6      = ctx.declare_event_output< float >("eta_jet6");
+  h_eta_jet7      = ctx.declare_event_output< float >("eta_jet7");
+  h_eta_jet8      = ctx.declare_event_output< float >("eta_jet8");
+  h_eta_jet9      = ctx.declare_event_output< float >("eta_jet9");
+  h_eta_jet10     = ctx.declare_event_output< float >("eta_jet10");
+  h_phi_jet1      = ctx.declare_event_output< float >("phi_jet1");
+  h_phi_jet2      = ctx.declare_event_output< float >("phi_jet2");
+  h_phi_jet3      = ctx.declare_event_output< float >("phi_jet3");
+  h_phi_jet4      = ctx.declare_event_output< float >("phi_jet4");
+  h_phi_jet5      = ctx.declare_event_output< float >("phi_jet5");
+  h_phi_jet6      = ctx.declare_event_output< float >("phi_jet6");
+  h_phi_jet7      = ctx.declare_event_output< float >("phi_jet7");
+  h_phi_jet8      = ctx.declare_event_output< float >("phi_jet8");
+  h_phi_jet9      = ctx.declare_event_output< float >("phi_jet9");
+  h_phi_jet10     = ctx.declare_event_output< float >("phi_jet10");
+  h_m_jet1        = ctx.declare_event_output< float >("m_jet1");
+  h_m_jet2        = ctx.declare_event_output< float >("m_jet2");
+  h_m_jet3        = ctx.declare_event_output< float >("m_jet3");
+  h_m_jet4        = ctx.declare_event_output< float >("m_jet4");
+  h_m_jet5        = ctx.declare_event_output< float >("m_jet5");
+  h_m_jet6        = ctx.declare_event_output< float >("m_jet6");
+  h_m_jet7        = ctx.declare_event_output< float >("m_jet7");
+  h_m_jet8        = ctx.declare_event_output< float >("m_jet8");
+  h_m_jet9        = ctx.declare_event_output< float >("m_jet9");
+  h_m_jet10        = ctx.declare_event_output< float >("m_jet10");
+  h_csv_jet1      = ctx.declare_event_output< float >("csv_jet1");
+  h_csv_jet2      = ctx.declare_event_output< float >("csv_jet2");
+  h_csv_jet3      = ctx.declare_event_output< float >("csv_jet3");
+  h_csv_jet4      = ctx.declare_event_output< float >("csv_jet4");
+  h_csv_jet5      = ctx.declare_event_output< float >("csv_jet5");
+  h_csv_jet6      = ctx.declare_event_output< float >("csv_jet6");
+  h_csv_jet7      = ctx.declare_event_output< float >("csv_jet7");
+  h_csv_jet8      = ctx.declare_event_output< float >("csv_jet8");
+  h_csv_jet9      = ctx.declare_event_output< float >("csv_jet9");
+  h_csv_jet10      = ctx.declare_event_output< float >("csv_jet10");
+  h_n_bjets_loose = ctx.declare_event_output< int   >("N_bJets_loose");
+  h_n_bjets_med   = ctx.declare_event_output< int   >("N_bJets_med");
+  h_n_bjets_tight = ctx.declare_event_output< int   >("N_bJets_tight");
+
+  h_n_ak8jets        = ctx.declare_event_output< int   >("n_ak8jets");
+  h_px_ak8jet1       = ctx.declare_event_output< float >("px_ak8jet1");
+  h_px_ak8jet2       = ctx.declare_event_output< float >("px_ak8jet2");
+  h_px_ak8jet3       = ctx.declare_event_output< float >("px_ak8jet3");
+  h_px_ak8jet4       = ctx.declare_event_output< float >("px_ak8jet4");
+  h_px_ak8jet5       = ctx.declare_event_output< float >("px_ak8jet5");
+  h_px_ak8jet6       = ctx.declare_event_output< float >("px_ak8jet6");
+  h_px_ak8jet7       = ctx.declare_event_output< float >("px_ak8jet7");
+  h_px_ak8jet8       = ctx.declare_event_output< float >("px_ak8jet8");
+  h_px_ak8jet9       = ctx.declare_event_output< float >("px_ak8jet9");
+  h_px_ak8jet10      = ctx.declare_event_output< float >("px_ak8jet10");
+  h_py_ak8jet1       = ctx.declare_event_output< float >("py_ak8jet1");
+  h_py_ak8jet2       = ctx.declare_event_output< float >("py_ak8jet2");
+  h_py_ak8jet3       = ctx.declare_event_output< float >("py_ak8jet3");
+  h_py_ak8jet4       = ctx.declare_event_output< float >("py_ak8jet4");
+  h_py_ak8jet5       = ctx.declare_event_output< float >("py_ak8jet5");
+  h_py_ak8jet6       = ctx.declare_event_output< float >("py_ak8jet6");
+  h_py_ak8jet7       = ctx.declare_event_output< float >("py_ak8jet7");
+  h_py_ak8jet8       = ctx.declare_event_output< float >("py_ak8jet8");
+  h_py_ak8jet9       = ctx.declare_event_output< float >("py_ak8jet9");
+  h_py_ak8jet10      = ctx.declare_event_output< float >("py_ak8jet10");
+  h_pz_ak8jet1       = ctx.declare_event_output< float >("pz_ak8jet1");
+  h_pz_ak8jet2       = ctx.declare_event_output< float >("pz_ak8jet2");
+  h_pz_ak8jet3       = ctx.declare_event_output< float >("pz_ak8jet3");
+  h_pz_ak8jet4       = ctx.declare_event_output< float >("pz_ak8jet4");
+  h_pz_ak8jet5       = ctx.declare_event_output< float >("pz_ak8jet5");
+  h_pz_ak8jet6       = ctx.declare_event_output< float >("pz_ak8jet6");
+  h_pz_ak8jet7       = ctx.declare_event_output< float >("pz_ak8jet7");
+  h_pz_ak8jet8       = ctx.declare_event_output< float >("pz_ak8jet8");
+  h_pz_ak8jet9       = ctx.declare_event_output< float >("pz_ak8jet9");
+  h_pz_ak8jet10      = ctx.declare_event_output< float >("pz_ak8jet10");
+  h_e_ak8jet1       = ctx.declare_event_output< float >("e_ak8jet1");
+  h_e_ak8jet2       = ctx.declare_event_output< float >("e_ak8jet2");
+  h_e_ak8jet3       = ctx.declare_event_output< float >("e_ak8jet3");
+  h_e_ak8jet4       = ctx.declare_event_output< float >("e_ak8jet4");
+  h_e_ak8jet5       = ctx.declare_event_output< float >("e_ak8jet5");
+  h_e_ak8jet6       = ctx.declare_event_output< float >("e_ak8jet6");
+  h_e_ak8jet7       = ctx.declare_event_output< float >("e_ak8jet7");
+  h_e_ak8jet8       = ctx.declare_event_output< float >("e_ak8jet8");
+  h_e_ak8jet9       = ctx.declare_event_output< float >("e_ak8jet9");
+  h_e_ak8jet10      = ctx.declare_event_output< float >("e_ak8jet10");
+
+  h_pt_ak8jet1       = ctx.declare_event_output< float >("pt_ak8jet1");
+  h_pt_ak8jet2       = ctx.declare_event_output< float >("pt_ak8jet2");
+  h_pt_ak8jet3       = ctx.declare_event_output< float >("pt_ak8jet3");
+  h_pt_ak8jet4       = ctx.declare_event_output< float >("pt_ak8jet4");
+  h_pt_ak8jet5       = ctx.declare_event_output< float >("pt_ak8jet5");
+  h_pt_ak8jet6       = ctx.declare_event_output< float >("pt_ak8jet6");
+  h_pt_ak8jet7       = ctx.declare_event_output< float >("pt_ak8jet7");
+  h_pt_ak8jet8       = ctx.declare_event_output< float >("pt_ak8jet8");
+  h_pt_ak8jet9       = ctx.declare_event_output< float >("pt_ak8jet9");
+  h_pt_ak8jet10      = ctx.declare_event_output< float >("pt_ak8jet10");
+  h_eta_ak8jet1      = ctx.declare_event_output< float >("eta_ak8jet1");
+  h_eta_ak8jet2      = ctx.declare_event_output< float >("eta_ak8jet2");
+  h_eta_ak8jet3      = ctx.declare_event_output< float >("eta_ak8jet3");
+  h_eta_ak8jet4      = ctx.declare_event_output< float >("eta_ak8jet4");
+  h_eta_ak8jet5      = ctx.declare_event_output< float >("eta_ak8jet5");
+  h_eta_ak8jet6      = ctx.declare_event_output< float >("eta_ak8jet6");
+  h_eta_ak8jet7      = ctx.declare_event_output< float >("eta_ak8jet7");
+  h_eta_ak8jet8      = ctx.declare_event_output< float >("eta_ak8jet8");
+  h_eta_ak8jet9      = ctx.declare_event_output< float >("eta_ak8jet9");
+  h_eta_ak8jet10     = ctx.declare_event_output< float >("eta_ak8jet10");
+  h_phi_ak8jet1      = ctx.declare_event_output< float >("phi_ak8jet1");
+  h_phi_ak8jet2      = ctx.declare_event_output< float >("phi_ak8jet2");
+  h_phi_ak8jet3      = ctx.declare_event_output< float >("phi_ak8jet3");
+  h_phi_ak8jet4      = ctx.declare_event_output< float >("phi_ak8jet4");
+  h_phi_ak8jet5      = ctx.declare_event_output< float >("phi_ak8jet5");
+  h_phi_ak8jet6      = ctx.declare_event_output< float >("phi_ak8jet6");
+  h_phi_ak8jet7      = ctx.declare_event_output< float >("phi_ak8jet7");
+  h_phi_ak8jet8      = ctx.declare_event_output< float >("phi_ak8jet8");
+  h_phi_ak8jet9      = ctx.declare_event_output< float >("phi_ak8jet9");
+  h_phi_ak8jet10     = ctx.declare_event_output< float >("phi_ak8jet10");
+  h_msd_ak8jet1      = ctx.declare_event_output< float >("msd_ak8jet1");
+  h_msd_ak8jet2      = ctx.declare_event_output< float >("msd_ak8jet2");
+  h_msd_ak8jet3      = ctx.declare_event_output< float >("msd_ak8jet3");
+  h_msd_ak8jet4      = ctx.declare_event_output< float >("msd_ak8jet4");
+  h_msd_ak8jet5      = ctx.declare_event_output< float >("msd_ak8jet5");
+  h_msd_ak8jet6      = ctx.declare_event_output< float >("msd_ak8jet6");
+  h_msd_ak8jet7      = ctx.declare_event_output< float >("msd_ak8jet7");
+  h_msd_ak8jet8      = ctx.declare_event_output< float >("msd_ak8jet8");
+  h_msd_ak8jet9      = ctx.declare_event_output< float >("msd_ak8jet9");
+  h_msd_ak8jet10     = ctx.declare_event_output< float >("msd_ak8jet10");
+  h_ndaughters_ak8jet1 = ctx.declare_event_output< int >("ndaughters_ak8jet1");
+  h_ndaughters_ak8jet2 = ctx.declare_event_output< int >("ndaughters_ak8jet2");
+  h_ndaughters_ak8jet3 = ctx.declare_event_output< int >("ndaughters_ak8jet3");
+  h_ndaughters_ak8jet4 = ctx.declare_event_output< int >("ndaughters_ak8jet4");
+  h_ndaughters_ak8jet5 = ctx.declare_event_output< int >("ndaughters_ak8jet5");
+  h_ndaughters_ak8jet6 = ctx.declare_event_output< int >("ndaughters_ak8jet6");
+  h_ndaughters_ak8jet7 = ctx.declare_event_output< int >("ndaughters_ak8jet7");
+  h_ndaughters_ak8jet8 = ctx.declare_event_output< int >("ndaughters_ak8jet8");
+  h_ndaughters_ak8jet9 = ctx.declare_event_output< int >("ndaughters_ak8jet9");
+  h_ndaughters_ak8jet10= ctx.declare_event_output< int >("ndaughters_ak8jet10");
+  h_tau1_ak8jet1 = ctx.declare_event_output< float >("tau1_ak8jet1");
+  h_tau1_ak8jet2 = ctx.declare_event_output< float >("tau1_ak8jet2");
+  h_tau1_ak8jet3 = ctx.declare_event_output< float >("tau1_ak8jet3");
+  h_tau1_ak8jet4 = ctx.declare_event_output< float >("tau1_ak8jet4");
+  h_tau1_ak8jet5 = ctx.declare_event_output< float >("tau1_ak8jet5");
+  h_tau1_ak8jet6 = ctx.declare_event_output< float >("tau1_ak8jet6");
+  h_tau1_ak8jet7 = ctx.declare_event_output< float >("tau1_ak8jet7");
+  h_tau1_ak8jet8 = ctx.declare_event_output< float >("tau1_ak8jet8");
+  h_tau1_ak8jet9 = ctx.declare_event_output< float >("tau1_ak8jet9");
+  h_tau1_ak8jet10= ctx.declare_event_output< float >("tau1_ak8jet10");
+  h_tau2_ak8jet1 = ctx.declare_event_output< float >("tau2_ak8jet1");
+  h_tau2_ak8jet2 = ctx.declare_event_output< float >("tau2_ak8jet2");
+  h_tau2_ak8jet3 = ctx.declare_event_output< float >("tau2_ak8jet3");
+  h_tau2_ak8jet4 = ctx.declare_event_output< float >("tau2_ak8jet4");
+  h_tau2_ak8jet5 = ctx.declare_event_output< float >("tau2_ak8jet5");
+  h_tau2_ak8jet6 = ctx.declare_event_output< float >("tau2_ak8jet6");
+  h_tau2_ak8jet7 = ctx.declare_event_output< float >("tau2_ak8jet7");
+  h_tau2_ak8jet8 = ctx.declare_event_output< float >("tau2_ak8jet8");
+  h_tau2_ak8jet9 = ctx.declare_event_output< float >("tau2_ak8jet9");
+  h_tau2_ak8jet10= ctx.declare_event_output< float >("tau2_ak8jet10");
+  h_tau3_ak8jet1 = ctx.declare_event_output< float >("tau3_ak8jet1");
+  h_tau3_ak8jet2 = ctx.declare_event_output< float >("tau3_ak8jet2");
+  h_tau3_ak8jet3 = ctx.declare_event_output< float >("tau3_ak8jet3");
+  h_tau3_ak8jet4 = ctx.declare_event_output< float >("tau3_ak8jet4");
+  h_tau3_ak8jet5 = ctx.declare_event_output< float >("tau3_ak8jet5");
+  h_tau3_ak8jet6 = ctx.declare_event_output< float >("tau3_ak8jet6");
+  h_tau3_ak8jet7 = ctx.declare_event_output< float >("tau3_ak8jet7");
+  h_tau3_ak8jet8 = ctx.declare_event_output< float >("tau3_ak8jet8");
+  h_tau3_ak8jet9 = ctx.declare_event_output< float >("tau3_ak8jet9");
+  h_tau3_ak8jet10= ctx.declare_event_output< float >("tau3_ak8jet10");
+  h_tau21_ak8jet1 = ctx.declare_event_output< float >("tau21_ak8jet1");
+  h_tau21_ak8jet2 = ctx.declare_event_output< float >("tau21_ak8jet2");
+  h_tau21_ak8jet3 = ctx.declare_event_output< float >("tau21_ak8jet3");
+  h_tau21_ak8jet4 = ctx.declare_event_output< float >("tau21_ak8jet4");
+  h_tau21_ak8jet5 = ctx.declare_event_output< float >("tau21_ak8jet5");
+  h_tau21_ak8jet6 = ctx.declare_event_output< float >("tau21_ak8jet6");
+  h_tau21_ak8jet7 = ctx.declare_event_output< float >("tau21_ak8jet7");
+  h_tau21_ak8jet8 = ctx.declare_event_output< float >("tau21_ak8jet8");
+  h_tau21_ak8jet9 = ctx.declare_event_output< float >("tau21_ak8jet9");
+  h_tau21_ak8jet10= ctx.declare_event_output< float >("tau21_ak8jet10");
+  h_tau32_ak8jet1 = ctx.declare_event_output< float >("tau32_ak8jet1");
+  h_tau32_ak8jet2 = ctx.declare_event_output< float >("tau32_ak8jet2");
+  h_tau32_ak8jet3 = ctx.declare_event_output< float >("tau32_ak8jet3");
+  h_tau32_ak8jet4 = ctx.declare_event_output< float >("tau32_ak8jet4");
+  h_tau32_ak8jet5 = ctx.declare_event_output< float >("tau32_ak8jet5");
+  h_tau32_ak8jet6 = ctx.declare_event_output< float >("tau32_ak8jet6");
+  h_tau32_ak8jet7 = ctx.declare_event_output< float >("tau32_ak8jet7");
+  h_tau32_ak8jet8 = ctx.declare_event_output< float >("tau32_ak8jet8");
+  h_tau32_ak8jet9 = ctx.declare_event_output< float >("tau32_ak8jet9");
+  h_tau32_ak8jet10= ctx.declare_event_output< float >("tau32_ak8jet10");
+
+
+  h_n_mu           = ctx.declare_event_output< int   >("n_mu");
+  h_px_mu1         = ctx.declare_event_output< float >("px_mu1");
+  h_py_mu1         = ctx.declare_event_output< float >("py_mu1");
+  h_pz_mu1         = ctx.declare_event_output< float >("pz_mu1");
+  h_pt_mu1         = ctx.declare_event_output< float >("pt_mu1");
+  h_eta_mu1        = ctx.declare_event_output< float >("eta_mu1");
+  h_phi_mu1        = ctx.declare_event_output< float >("phi_mu1");
+  h_e_mu1          = ctx.declare_event_output< float >("e_mu1");
+  h_reliso_mu1     = ctx.declare_event_output< float >("reliso_mu1");
+  h_drmin_mu1_jet  = ctx.declare_event_output< float >("drmin_mu1_jet");
+  h_ptrel_mu1_jet  = ctx.declare_event_output< float >("ptrel_mu1_jet");
+
+  h_n_ele           = ctx.declare_event_output< int   >("n_ele");
+  h_px_ele1         = ctx.declare_event_output< float >("px_ele1");
+  h_py_ele1         = ctx.declare_event_output< float >("py_ele1");
+  h_pz_ele1         = ctx.declare_event_output< float >("pz_ele1");
+  h_pt_ele1         = ctx.declare_event_output< float >("pt_ele1");
+  h_eta_ele1        = ctx.declare_event_output< float >("eta_ele1");
+  h_phi_ele1        = ctx.declare_event_output< float >("phi_ele1");
+  h_e_ele1          = ctx.declare_event_output< float >("e_ele1");
+  h_reliso_ele1     = ctx.declare_event_output< float >("reliso_ele1");
+  h_drmin_ele1_jet  = ctx.declare_event_output< float >("drmin_ele1_jet");
+  h_ptrel_ele1_jet  = ctx.declare_event_output< float >("ptrel_ele1_jet");
+
+  h_npv           = ctx.declare_event_output< int   >("npv");
+  h_met_px        = ctx.declare_event_output< float >("met_px");
+  h_met_py        = ctx.declare_event_output< float >("met_py");
+  h_met           = ctx.declare_event_output< float >("met");
+  h_stjets        = ctx.declare_event_output< float >("stjets");
+  h_stlep         = ctx.declare_event_output< float >("stlep");
+  h_st            = ctx.declare_event_output< float >("st");
+  h_mzprime       = ctx.declare_event_output< float >("m_zprime");
+  h_chi2zprime    = ctx.declare_event_output< float >("chi2_zprime");
+  h_s11           = ctx.declare_event_output< float >("s11");
+  h_s12           = ctx.declare_event_output< float >("s12");
+  h_s13           = ctx.declare_event_output< float >("s13");
+  h_s22           = ctx.declare_event_output< float >("s22");
+  h_s23           = ctx.declare_event_output< float >("s23");
+  h_s33           = ctx.declare_event_output< float >("s33");
+
+
+  h_BestZprimeCandidateChi2 = ctx.get_handle<ZprimeCandidate*>("ZprimeCandidateBestChi2");
+  h_is_zprime_reconstructed_chi2 = ctx.get_handle<bool>("is_zprime_reconstructed_chi2");
+}
+
+bool ZprimeHandleBuilder::process(uhh2::Event& event){
+
+  /*
+  █      ██ ███████ ████████ ███████
+  █      ██ ██         ██    ██
+  █      ██ █████      ██    ███████
+  █ ██   ██ ██         ██         ██
+  █  █████  ███████    ██    ███████
+  */
+
+  vector<Jet>* jets = event.jets;
+  event.set(h_eventweight, event.weight);
+  event.set(h_n_jets, jets->size());
+
+  if(jets->size() >= 1){
+    event.set(h_px_jet1,  jets->at(0).v4().px());
+    event.set(h_py_jet1,  jets->at(0).v4().py());
+    event.set(h_pz_jet1,  jets->at(0).v4().pz());
+    event.set(h_e_jet1,  jets->at(0).v4().e());
+    event.set(h_pt_jet1,  jets->at(0).pt());
+    event.set(h_eta_jet1, jets->at(0).eta());
+    event.set(h_phi_jet1, jets->at(0).phi());
+    event.set(h_m_jet1,   jets->at(0).v4().M());
+    event.set(h_csv_jet1, jets->at(0).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet1,  0.);
+    event.set(h_py_jet1,  0.);
+    event.set(h_pz_jet1,  0.);
+    event.set(h_e_jet1,  0.);
+    event.set(h_pt_jet1,  0.);
+    event.set(h_eta_jet1, 0.);
+    event.set(h_phi_jet1, 0.);
+    event.set(h_m_jet1,   0.);
+    event.set(h_csv_jet1, 0.);
+  }
+  if(jets->size() >= 2){
+    event.set(h_px_jet2,  jets->at(1).v4().px());
+    event.set(h_py_jet2,  jets->at(1).v4().py());
+    event.set(h_pz_jet2,  jets->at(1).v4().pz());
+    event.set(h_e_jet2,  jets->at(1).v4().e());
+    event.set(h_pt_jet2,  jets->at(1).pt());
+    event.set(h_eta_jet2, jets->at(1).eta());
+    event.set(h_phi_jet2, jets->at(1).phi());
+    event.set(h_m_jet2,   jets->at(1).v4().M());
+    event.set(h_csv_jet2, jets->at(1).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet2,  0.);
+    event.set(h_py_jet2,  0.);
+    event.set(h_pz_jet2,  0.);
+    event.set(h_e_jet2,  0.);
+    event.set(h_pt_jet2,  0.);
+    event.set(h_eta_jet2, 0.);
+    event.set(h_phi_jet2, 0.);
+    event.set(h_m_jet2,   0.);
+    event.set(h_csv_jet2, 0.);
+  }
+  if(jets->size() >= 3){
+    event.set(h_px_jet3,  jets->at(2).v4().px());
+    event.set(h_py_jet3,  jets->at(2).v4().py());
+    event.set(h_pz_jet3,  jets->at(2).v4().pz());
+    event.set(h_e_jet3,  jets->at(2).v4().e());
+    event.set(h_pt_jet3,  jets->at(2).pt());
+    event.set(h_eta_jet3, jets->at(2).eta());
+    event.set(h_phi_jet3, jets->at(2).phi());
+    event.set(h_m_jet3,   jets->at(2).v4().M());
+    event.set(h_csv_jet3, jets->at(2).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet3,  0.);
+    event.set(h_py_jet3,  0.);
+    event.set(h_pz_jet3,  0.);
+    event.set(h_e_jet3,  0.);
+    event.set(h_pt_jet3,  0.);
+    event.set(h_eta_jet3, 0.);
+    event.set(h_phi_jet3, 0.);
+    event.set(h_m_jet3,   0.);
+    event.set(h_csv_jet3, 0.);
+  }
+  if(jets->size() >= 4){
+    event.set(h_px_jet4,  jets->at(3).v4().px());
+    event.set(h_py_jet4,  jets->at(3).v4().py());
+    event.set(h_pz_jet4,  jets->at(3).v4().pz());
+    event.set(h_e_jet4,  jets->at(3).v4().e());
+    event.set(h_pt_jet4,  jets->at(3).pt());
+    event.set(h_eta_jet4, jets->at(3).eta());
+    event.set(h_phi_jet4, jets->at(3).phi());
+    event.set(h_m_jet4,   jets->at(3).v4().M());
+    event.set(h_csv_jet4, jets->at(3).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet4,  0.);
+    event.set(h_py_jet4,  0.);
+    event.set(h_pz_jet4,  0.);
+    event.set(h_e_jet4,  0.);
+    event.set(h_pt_jet4,  0.);
+    event.set(h_eta_jet4, 0.);
+    event.set(h_phi_jet4, 0.);
+    event.set(h_m_jet4,   0.);
+    event.set(h_csv_jet4, 0.);
+  }
+  if(jets->size() >= 5){
+    event.set(h_px_jet5,  jets->at(4).v4().px());
+    event.set(h_py_jet5,  jets->at(4).v4().py());
+    event.set(h_pz_jet5,  jets->at(4).v4().pz());
+    event.set(h_e_jet5,  jets->at(4).v4().e());
+    event.set(h_pt_jet5,  jets->at(4).pt());
+    event.set(h_eta_jet5, jets->at(4).eta());
+    event.set(h_phi_jet5, jets->at(4).phi());
+    event.set(h_m_jet5,   jets->at(4).v4().M());
+    event.set(h_csv_jet5, jets->at(4).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet5,  0.);
+    event.set(h_py_jet5,  0.);
+    event.set(h_pz_jet5,  0.);
+    event.set(h_e_jet5,  0.);
+    event.set(h_pt_jet5,  0.);
+    event.set(h_eta_jet5, 0.);
+    event.set(h_phi_jet5, 0.);
+    event.set(h_m_jet5,   0.);
+    event.set(h_csv_jet5, 0.);
+  }
+  if(jets->size() >= 6){
+    event.set(h_px_jet6,  jets->at(5).v4().px());
+    event.set(h_py_jet6,  jets->at(5).v4().py());
+    event.set(h_pz_jet6,  jets->at(5).v4().pz());
+    event.set(h_e_jet6,  jets->at(5).v4().e());
+    event.set(h_pt_jet6,  jets->at(5).pt());
+    event.set(h_eta_jet6, jets->at(5).eta());
+    event.set(h_phi_jet6, jets->at(5).phi());
+    event.set(h_m_jet6,   jets->at(5).v4().M());
+    event.set(h_csv_jet6, jets->at(5).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet6,  0.);
+    event.set(h_py_jet6,  0.);
+    event.set(h_pz_jet6,  0.);
+    event.set(h_e_jet6,  0.);
+    event.set(h_pt_jet6,  0.);
+    event.set(h_eta_jet6, 0.);
+    event.set(h_phi_jet6, 0.);
+    event.set(h_m_jet6,   0.);
+    event.set(h_csv_jet6, 0.);
+  }
+  if(jets->size() >= 7){
+    event.set(h_px_jet7,  jets->at(6).v4().px());
+    event.set(h_py_jet7,  jets->at(6).v4().py());
+    event.set(h_pz_jet7,  jets->at(6).v4().pz());
+    event.set(h_e_jet7,  jets->at(6).v4().e());
+    event.set(h_pt_jet7,  jets->at(6).pt());
+    event.set(h_eta_jet7, jets->at(6).eta());
+    event.set(h_phi_jet7, jets->at(6).phi());
+    event.set(h_m_jet7,   jets->at(6).v4().M());
+    event.set(h_csv_jet7, jets->at(6).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet7,  0.);
+    event.set(h_py_jet7,  0.);
+    event.set(h_pz_jet7,  0.);
+    event.set(h_e_jet7,  0.);
+    event.set(h_pt_jet7,  0.);
+    event.set(h_eta_jet7, 0.);
+    event.set(h_phi_jet7, 0.);
+    event.set(h_m_jet7,   0.);
+    event.set(h_csv_jet7, 0.);
+  }
+  if(jets->size() >= 8){
+    event.set(h_px_jet8,  jets->at(7).v4().px());
+    event.set(h_py_jet8,  jets->at(7).v4().py());
+    event.set(h_pz_jet8,  jets->at(7).v4().pz());
+    event.set(h_e_jet8,  jets->at(7).v4().e());
+    event.set(h_pt_jet8,  jets->at(7).pt());
+    event.set(h_eta_jet8, jets->at(7).eta());
+    event.set(h_phi_jet8, jets->at(7).phi());
+    event.set(h_m_jet8,   jets->at(7).v4().M());
+    event.set(h_csv_jet8, jets->at(7).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet8,  0.);
+    event.set(h_py_jet8,  0.);
+    event.set(h_pz_jet8,  0.);
+    event.set(h_e_jet8,  0.);
+    event.set(h_pt_jet8,  0.);
+    event.set(h_eta_jet8, 0.);
+    event.set(h_phi_jet8, 0.);
+    event.set(h_m_jet8,   0.);
+    event.set(h_csv_jet8, 0.);
+  }
+  if(jets->size() >= 9){
+    event.set(h_px_jet9,  jets->at(8).v4().px());
+    event.set(h_py_jet9,  jets->at(8).v4().py());
+    event.set(h_pz_jet9,  jets->at(8).v4().pz());
+    event.set(h_e_jet9,  jets->at(8).v4().e());
+    event.set(h_pt_jet9,  jets->at(8).pt());
+    event.set(h_eta_jet9, jets->at(8).eta());
+    event.set(h_phi_jet9, jets->at(8).phi());
+    event.set(h_m_jet9,   jets->at(8).v4().M());
+    event.set(h_csv_jet9, jets->at(8).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet9,  0.);
+    event.set(h_py_jet9,  0.);
+    event.set(h_pz_jet9,  0.);
+    event.set(h_e_jet9,  0.);
+    event.set(h_pt_jet9,  0.);
+    event.set(h_eta_jet9, 0.);
+    event.set(h_phi_jet9, 0.);
+    event.set(h_m_jet9,   0.);
+    event.set(h_csv_jet9, 0.);
+  }
+  if(jets->size() >= 10){
+    event.set(h_px_jet10,  jets->at(9).v4().px());
+    event.set(h_py_jet10,  jets->at(9).v4().py());
+    event.set(h_pz_jet10,  jets->at(9).v4().pz());
+    event.set(h_e_jet10,  jets->at(9).v4().e());
+    event.set(h_pt_jet10,  jets->at(9).pt());
+    event.set(h_eta_jet10, jets->at(9).eta());
+    event.set(h_phi_jet10, jets->at(9).phi());
+    event.set(h_m_jet10,   jets->at(9).v4().M());
+    event.set(h_csv_jet10, jets->at(9).btag_combinedSecondaryVertex());
+  }
+  else{
+    event.set(h_px_jet10,  0.);
+    event.set(h_py_jet10,  0.);
+    event.set(h_pz_jet10,  0.);
+    event.set(h_e_jet10,   0.);
+    event.set(h_pt_jet10,  0.);
+    event.set(h_eta_jet10, 0.);
+    event.set(h_phi_jet10, 0.);
+    event.set(h_m_jet10,   0.);
+    event.set(h_csv_jet10, 0.);
+  }
+
+  int Nbjets_loose = 0, Nbjets_medium = 0, Nbjets_tight = 0;
+  CSVBTag Btag_loose = CSVBTag(CSVBTag::WP_LOOSE);
+  CSVBTag Btag_medium = CSVBTag(CSVBTag::WP_MEDIUM);
+  CSVBTag Btag_tight = CSVBTag(CSVBTag::WP_TIGHT);
+  for (unsigned int i=0; i<jets->size(); i++) {
+    if(Btag_loose(jets->at(i),event))  Nbjets_loose++;
+    if(Btag_medium(jets->at(i),event)) Nbjets_medium++;
+    if(Btag_tight(jets->at(i),event))  Nbjets_tight++;
+  }
+  event.set(h_n_bjets_loose, Nbjets_loose);
+  event.set(h_n_bjets_med, Nbjets_medium);
+  event.set(h_n_bjets_tight, Nbjets_tight);
+
+  /*
+  █  █████  ██   ██  █████       ██ ███████ ████████ ███████
+  █ ██   ██ ██  ██  ██   ██      ██ ██         ██    ██
+  █ ███████ █████    █████       ██ █████      ██    ███████
+  █ ██   ██ ██  ██  ██   ██ ██   ██ ██         ██         ██
+  █ ██   ██ ██   ██  █████   █████  ███████    ██    ███████
+  */
+
+  vector<TopJet>* ak8jets = event.toppuppijets;
+  event.set(h_n_ak8jets, ak8jets->size());
+
+  if(ak8jets->size() >= 1){
+    event.set(h_px_ak8jet1,  ak8jets->at(0).v4().px());
+    event.set(h_py_ak8jet1,  ak8jets->at(0).v4().py());
+    event.set(h_pz_ak8jet1,  ak8jets->at(0).v4().pz());
+    event.set(h_e_ak8jet1,  ak8jets->at(0).v4().e());
+    event.set(h_pt_ak8jet1,  ak8jets->at(0).pt());
+    event.set(h_eta_ak8jet1, ak8jets->at(0).eta());
+    event.set(h_phi_ak8jet1, ak8jets->at(0).phi());
+    event.set(h_msd_ak8jet1, ak8jets->at(0).softdropmass());
+    event.set(h_ndaughters_ak8jet1, ak8jets->at(0).numberOfDaughters());
+    event.set(h_tau1_ak8jet1, ak8jets->at(0).tau1());
+    event.set(h_tau2_ak8jet1, ak8jets->at(0).tau2());
+    event.set(h_tau3_ak8jet1, ak8jets->at(0).tau3());
+    event.set(h_tau21_ak8jet1, ak8jets->at(0).tau2()/ak8jets->at(0).tau1());
+    event.set(h_tau32_ak8jet1, ak8jets->at(0).tau3()/ak8jets->at(0).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet1,  0.);
+    event.set(h_py_ak8jet1,  0.);
+    event.set(h_pz_ak8jet1,  0.);
+    event.set(h_e_ak8jet1,  0.);
+    event.set(h_pt_ak8jet1,  0.);
+    event.set(h_eta_ak8jet1, 0.);
+    event.set(h_phi_ak8jet1, 0.);
+    event.set(h_msd_ak8jet1, 0.);
+    event.set(h_ndaughters_ak8jet1, 0.);
+    event.set(h_tau1_ak8jet1, 0.);
+    event.set(h_tau2_ak8jet1, 0.);
+    event.set(h_tau3_ak8jet1, 0.);
+    event.set(h_tau21_ak8jet1, 0.);
+    event.set(h_tau32_ak8jet1, 0.);
+  }
+  if(ak8jets->size() >= 2){
+    event.set(h_px_ak8jet2,  ak8jets->at(1).v4().px());
+    event.set(h_py_ak8jet2,  ak8jets->at(1).v4().py());
+    event.set(h_pz_ak8jet2,  ak8jets->at(1).v4().pz());
+    event.set(h_e_ak8jet2,  ak8jets->at(1).v4().e());
+    event.set(h_pt_ak8jet2,  ak8jets->at(1).pt());
+    event.set(h_eta_ak8jet2, ak8jets->at(1).eta());
+    event.set(h_phi_ak8jet2, ak8jets->at(1).phi());
+    event.set(h_msd_ak8jet2, ak8jets->at(1).softdropmass());
+    event.set(h_ndaughters_ak8jet2, ak8jets->at(1).numberOfDaughters());
+    event.set(h_tau1_ak8jet2, ak8jets->at(1).tau1());
+    event.set(h_tau2_ak8jet2, ak8jets->at(1).tau2());
+    event.set(h_tau3_ak8jet2, ak8jets->at(1).tau3());
+    event.set(h_tau21_ak8jet2, ak8jets->at(1).tau2()/ak8jets->at(1).tau1());
+    event.set(h_tau32_ak8jet2, ak8jets->at(1).tau3()/ak8jets->at(1).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet2,  0.);
+    event.set(h_py_ak8jet2,  0.);
+    event.set(h_pz_ak8jet2,  0.);
+    event.set(h_e_ak8jet2,  0.);
+    event.set(h_pt_ak8jet2,  0.);
+    event.set(h_eta_ak8jet2, 0.);
+    event.set(h_phi_ak8jet2, 0.);
+    event.set(h_msd_ak8jet2, 0.);
+    event.set(h_ndaughters_ak8jet2, 0.);
+    event.set(h_tau1_ak8jet2, 0.);
+    event.set(h_tau2_ak8jet2, 0.);
+    event.set(h_tau3_ak8jet2, 0.);
+    event.set(h_tau21_ak8jet2, 0.);
+    event.set(h_tau32_ak8jet2, 0.);
+  }
+  if(ak8jets->size() >= 3){
+    event.set(h_px_ak8jet3,  ak8jets->at(2).v4().px());
+    event.set(h_py_ak8jet3,  ak8jets->at(2).v4().py());
+    event.set(h_pz_ak8jet3,  ak8jets->at(2).v4().pz());
+    event.set(h_e_ak8jet3,  ak8jets->at(2).v4().e());
+    event.set(h_pt_ak8jet3,  ak8jets->at(2).pt());
+    event.set(h_eta_ak8jet3, ak8jets->at(2).eta());
+    event.set(h_phi_ak8jet3, ak8jets->at(2).phi());
+    event.set(h_msd_ak8jet3, ak8jets->at(2).softdropmass());
+    event.set(h_ndaughters_ak8jet3, ak8jets->at(2).numberOfDaughters());
+    event.set(h_tau1_ak8jet3, ak8jets->at(2).tau1());
+    event.set(h_tau2_ak8jet3, ak8jets->at(2).tau2());
+    event.set(h_tau3_ak8jet3, ak8jets->at(2).tau3());
+    event.set(h_tau21_ak8jet3, ak8jets->at(2).tau2()/ak8jets->at(2).tau1());
+    event.set(h_tau32_ak8jet3, ak8jets->at(2).tau3()/ak8jets->at(2).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet3,  0.);
+    event.set(h_py_ak8jet3,  0.);
+    event.set(h_pz_ak8jet3,  0.);
+    event.set(h_e_ak8jet3,  0.);
+    event.set(h_pt_ak8jet3,  0.);
+    event.set(h_eta_ak8jet3, 0.);
+    event.set(h_phi_ak8jet3, 0.);
+    event.set(h_msd_ak8jet3, 0.);
+    event.set(h_ndaughters_ak8jet3, 0.);
+    event.set(h_tau1_ak8jet3, 0.);
+    event.set(h_tau2_ak8jet3, 0.);
+    event.set(h_tau3_ak8jet3, 0.);
+    event.set(h_tau21_ak8jet3, 0.);
+    event.set(h_tau32_ak8jet3, 0.);
+  }
+  if(ak8jets->size() >= 4){
+    event.set(h_px_ak8jet4,  ak8jets->at(3).v4().px());
+    event.set(h_py_ak8jet4,  ak8jets->at(3).v4().py());
+    event.set(h_pz_ak8jet4,  ak8jets->at(3).v4().pz());
+    event.set(h_e_ak8jet4,  ak8jets->at(3).v4().e());
+    event.set(h_pt_ak8jet4,  ak8jets->at(3).pt());
+    event.set(h_eta_ak8jet4, ak8jets->at(3).eta());
+    event.set(h_phi_ak8jet4, ak8jets->at(3).phi());
+    event.set(h_msd_ak8jet4, ak8jets->at(3).softdropmass());
+    event.set(h_ndaughters_ak8jet4, ak8jets->at(3).numberOfDaughters());
+    event.set(h_tau1_ak8jet4, ak8jets->at(3).tau1());
+    event.set(h_tau2_ak8jet4, ak8jets->at(3).tau2());
+    event.set(h_tau3_ak8jet4, ak8jets->at(3).tau3());
+    event.set(h_tau21_ak8jet4, ak8jets->at(3).tau2()/ak8jets->at(3).tau1());
+    event.set(h_tau32_ak8jet4, ak8jets->at(3).tau3()/ak8jets->at(3).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet4,  0.);
+    event.set(h_py_ak8jet4,  0.);
+    event.set(h_pz_ak8jet4,  0.);
+    event.set(h_e_ak8jet4,  0.);
+    event.set(h_pt_ak8jet4,  0.);
+    event.set(h_eta_ak8jet4, 0.);
+    event.set(h_phi_ak8jet4, 0.);
+    event.set(h_msd_ak8jet4, 0.);
+    event.set(h_ndaughters_ak8jet4, 0.);
+    event.set(h_tau1_ak8jet4, 0.);
+    event.set(h_tau2_ak8jet4, 0.);
+    event.set(h_tau3_ak8jet4, 0.);
+    event.set(h_tau21_ak8jet4, 0.);
+    event.set(h_tau32_ak8jet4, 0.);
+  }
+  if(ak8jets->size() >= 5){
+    event.set(h_px_ak8jet5,  ak8jets->at(4).v4().px());
+    event.set(h_py_ak8jet5,  ak8jets->at(4).v4().py());
+    event.set(h_pz_ak8jet5,  ak8jets->at(4).v4().pz());
+    event.set(h_e_ak8jet5,  ak8jets->at(4).v4().e());
+    event.set(h_pt_ak8jet5,  ak8jets->at(4).pt());
+    event.set(h_eta_ak8jet5, ak8jets->at(4).eta());
+    event.set(h_phi_ak8jet5, ak8jets->at(4).phi());
+    event.set(h_msd_ak8jet5, ak8jets->at(4).softdropmass());
+    event.set(h_ndaughters_ak8jet5, ak8jets->at(4).numberOfDaughters());
+    event.set(h_tau1_ak8jet5, ak8jets->at(4).tau1());
+    event.set(h_tau2_ak8jet5, ak8jets->at(4).tau2());
+    event.set(h_tau3_ak8jet5, ak8jets->at(4).tau3());
+    event.set(h_tau21_ak8jet5, ak8jets->at(4).tau2()/ak8jets->at(4).tau1());
+    event.set(h_tau32_ak8jet5, ak8jets->at(4).tau3()/ak8jets->at(4).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet5,  0.);
+    event.set(h_py_ak8jet5,  0.);
+    event.set(h_pz_ak8jet5,  0.);
+    event.set(h_e_ak8jet5,  0.);
+    event.set(h_pt_ak8jet5,  0.);
+    event.set(h_eta_ak8jet5, 0.);
+    event.set(h_phi_ak8jet5, 0.);
+    event.set(h_msd_ak8jet5, 0.);
+    event.set(h_ndaughters_ak8jet5, 0.);
+    event.set(h_tau1_ak8jet5, 0.);
+    event.set(h_tau2_ak8jet5, 0.);
+    event.set(h_tau3_ak8jet5, 0.);
+    event.set(h_tau21_ak8jet5, 0.);
+    event.set(h_tau32_ak8jet5, 0.);
+  }
+  if(ak8jets->size() >= 6){
+    event.set(h_px_ak8jet6,  ak8jets->at(5).v4().px());
+    event.set(h_py_ak8jet6,  ak8jets->at(5).v4().py());
+    event.set(h_pz_ak8jet6,  ak8jets->at(5).v4().pz());
+    event.set(h_e_ak8jet6,  ak8jets->at(5).v4().e());
+    event.set(h_pt_ak8jet6,  ak8jets->at(5).pt());
+    event.set(h_eta_ak8jet6, ak8jets->at(5).eta());
+    event.set(h_phi_ak8jet6, ak8jets->at(5).phi());
+    event.set(h_msd_ak8jet6, ak8jets->at(5).softdropmass());
+    event.set(h_ndaughters_ak8jet6, ak8jets->at(5).numberOfDaughters());
+    event.set(h_tau1_ak8jet6, ak8jets->at(5).tau1());
+    event.set(h_tau2_ak8jet6, ak8jets->at(5).tau2());
+    event.set(h_tau3_ak8jet6, ak8jets->at(5).tau3());
+    event.set(h_tau21_ak8jet6, ak8jets->at(5).tau2()/ak8jets->at(5).tau1());
+    event.set(h_tau32_ak8jet6, ak8jets->at(5).tau3()/ak8jets->at(5).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet6,  0.);
+    event.set(h_py_ak8jet6,  0.);
+    event.set(h_pz_ak8jet6,  0.);
+    event.set(h_e_ak8jet6,  0.);
+    event.set(h_pt_ak8jet6,  0.);
+    event.set(h_eta_ak8jet6, 0.);
+    event.set(h_phi_ak8jet6, 0.);
+    event.set(h_msd_ak8jet6, 0.);
+    event.set(h_ndaughters_ak8jet6, 0.);
+    event.set(h_tau1_ak8jet6, 0.);
+    event.set(h_tau2_ak8jet6, 0.);
+    event.set(h_tau3_ak8jet6, 0.);
+    event.set(h_tau21_ak8jet6, 0.);
+    event.set(h_tau32_ak8jet6, 0.);
+  }
+  if(ak8jets->size() >= 7){
+    event.set(h_px_ak8jet7,  ak8jets->at(6).v4().px());
+    event.set(h_py_ak8jet7,  ak8jets->at(6).v4().py());
+    event.set(h_pz_ak8jet7,  ak8jets->at(6).v4().pz());
+    event.set(h_e_ak8jet7,  ak8jets->at(6).v4().e());
+    event.set(h_pt_ak8jet7,  ak8jets->at(6).pt());
+    event.set(h_eta_ak8jet7, ak8jets->at(6).eta());
+    event.set(h_phi_ak8jet7, ak8jets->at(6).phi());
+    event.set(h_msd_ak8jet7, ak8jets->at(6).softdropmass());
+    event.set(h_ndaughters_ak8jet7, ak8jets->at(6).numberOfDaughters());
+    event.set(h_tau1_ak8jet7, ak8jets->at(6).tau1());
+    event.set(h_tau2_ak8jet7, ak8jets->at(6).tau2());
+    event.set(h_tau3_ak8jet7, ak8jets->at(6).tau3());
+    event.set(h_tau21_ak8jet7, ak8jets->at(6).tau2()/ak8jets->at(6).tau1());
+    event.set(h_tau32_ak8jet7, ak8jets->at(6).tau3()/ak8jets->at(6).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet7,  0.);
+    event.set(h_py_ak8jet7,  0.);
+    event.set(h_pz_ak8jet7,  0.);
+    event.set(h_e_ak8jet7,  0.);
+    event.set(h_pt_ak8jet7,  0.);
+    event.set(h_eta_ak8jet7, 0.);
+    event.set(h_phi_ak8jet7, 0.);
+    event.set(h_msd_ak8jet7, 0.);
+    event.set(h_ndaughters_ak8jet7, 0.);
+    event.set(h_tau1_ak8jet7, 0.);
+    event.set(h_tau2_ak8jet7, 0.);
+    event.set(h_tau3_ak8jet7, 0.);
+    event.set(h_tau21_ak8jet7, 0.);
+    event.set(h_tau32_ak8jet7, 0.);
+  }
+  if(ak8jets->size() >= 8){
+    event.set(h_px_ak8jet8,  ak8jets->at(7).v4().px());
+    event.set(h_py_ak8jet8,  ak8jets->at(7).v4().py());
+    event.set(h_pz_ak8jet8,  ak8jets->at(7).v4().pz());
+    event.set(h_e_ak8jet8,  ak8jets->at(7).v4().e());
+    event.set(h_pt_ak8jet8,  ak8jets->at(7).pt());
+    event.set(h_eta_ak8jet8, ak8jets->at(7).eta());
+    event.set(h_phi_ak8jet8, ak8jets->at(7).phi());
+    event.set(h_msd_ak8jet8, ak8jets->at(7).softdropmass());
+    event.set(h_ndaughters_ak8jet8, ak8jets->at(7).numberOfDaughters());
+    event.set(h_tau1_ak8jet8, ak8jets->at(7).tau1());
+    event.set(h_tau2_ak8jet8, ak8jets->at(7).tau2());
+    event.set(h_tau3_ak8jet8, ak8jets->at(7).tau3());
+    event.set(h_tau21_ak8jet8, ak8jets->at(7).tau2()/ak8jets->at(7).tau1());
+    event.set(h_tau32_ak8jet8, ak8jets->at(7).tau3()/ak8jets->at(7).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet8,  0.);
+    event.set(h_py_ak8jet8,  0.);
+    event.set(h_pz_ak8jet8,  0.);
+    event.set(h_e_ak8jet8,  0.);
+    event.set(h_pt_ak8jet8,  0.);
+    event.set(h_eta_ak8jet8, 0.);
+    event.set(h_phi_ak8jet8, 0.);
+    event.set(h_msd_ak8jet8, 0.);
+    event.set(h_ndaughters_ak8jet8, 0.);
+    event.set(h_tau1_ak8jet8, 0.);
+    event.set(h_tau2_ak8jet8, 0.);
+    event.set(h_tau3_ak8jet8, 0.);
+    event.set(h_tau21_ak8jet8, 0.);
+    event.set(h_tau32_ak8jet8, 0.);
+  }
+  if(ak8jets->size() >= 9){
+    event.set(h_px_ak8jet9,  ak8jets->at(8).v4().px());
+    event.set(h_py_ak8jet9,  ak8jets->at(8).v4().py());
+    event.set(h_pz_ak8jet9,  ak8jets->at(8).v4().pz());
+    event.set(h_e_ak8jet9,  ak8jets->at(8).v4().e());
+    event.set(h_pt_ak8jet9,  ak8jets->at(8).pt());
+    event.set(h_eta_ak8jet9, ak8jets->at(8).eta());
+    event.set(h_phi_ak8jet9, ak8jets->at(8).phi());
+    event.set(h_msd_ak8jet9, ak8jets->at(8).softdropmass());
+    event.set(h_ndaughters_ak8jet9, ak8jets->at(8).numberOfDaughters());
+    event.set(h_tau1_ak8jet9, ak8jets->at(8).tau1());
+    event.set(h_tau2_ak8jet9, ak8jets->at(8).tau2());
+    event.set(h_tau3_ak8jet9, ak8jets->at(8).tau3());
+    event.set(h_tau21_ak8jet9, ak8jets->at(8).tau2()/ak8jets->at(8).tau1());
+    event.set(h_tau32_ak8jet9, ak8jets->at(8).tau3()/ak8jets->at(8).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet9,  0.);
+    event.set(h_py_ak8jet9,  0.);
+    event.set(h_pz_ak8jet9,  0.);
+    event.set(h_e_ak8jet9,  0.);
+    event.set(h_pt_ak8jet9,  0.);
+    event.set(h_eta_ak8jet9, 0.);
+    event.set(h_phi_ak8jet9, 0.);
+    event.set(h_msd_ak8jet9, 0.);
+    event.set(h_ndaughters_ak8jet9, 0.);
+    event.set(h_tau1_ak8jet9, 0.);
+    event.set(h_tau2_ak8jet9, 0.);
+    event.set(h_tau3_ak8jet9, 0.);
+    event.set(h_tau21_ak8jet9, 0.);
+    event.set(h_tau32_ak8jet9, 0.);
+  }
+  if(ak8jets->size() >= 10){
+    event.set(h_px_ak8jet10,  ak8jets->at(9).v4().px());
+    event.set(h_py_ak8jet10,  ak8jets->at(9).v4().py());
+    event.set(h_pz_ak8jet10,  ak8jets->at(9).v4().pz());
+    event.set(h_e_ak8jet10,  ak8jets->at(9).v4().e());
+    event.set(h_pt_ak8jet10,  ak8jets->at(9).pt());
+    event.set(h_eta_ak8jet10, ak8jets->at(9).eta());
+    event.set(h_phi_ak8jet10, ak8jets->at(9).phi());
+    event.set(h_msd_ak8jet10, ak8jets->at(9).softdropmass());
+    event.set(h_ndaughters_ak8jet10, ak8jets->at(9).numberOfDaughters());
+    event.set(h_tau1_ak8jet10, ak8jets->at(9).tau1());
+    event.set(h_tau2_ak8jet10, ak8jets->at(9).tau2());
+    event.set(h_tau3_ak8jet10, ak8jets->at(9).tau3());
+    event.set(h_tau21_ak8jet10, ak8jets->at(9).tau2()/ak8jets->at(9).tau1());
+    event.set(h_tau32_ak8jet10, ak8jets->at(9).tau3()/ak8jets->at(9).tau2());
+  }
+  else{
+    event.set(h_px_ak8jet10,  0.);
+    event.set(h_py_ak8jet10,  0.);
+    event.set(h_pz_ak8jet10,  0.);
+    event.set(h_e_ak8jet10,  0.);
+    event.set(h_pt_ak8jet10,  0.);
+    event.set(h_eta_ak8jet10, 0.);
+    event.set(h_phi_ak8jet10, 0.);
+    event.set(h_msd_ak8jet10, 0.);
+    event.set(h_ndaughters_ak8jet10, 0.);
+    event.set(h_tau1_ak8jet10, 0.);
+    event.set(h_tau2_ak8jet10, 0.);
+    event.set(h_tau3_ak8jet10, 0.);
+    event.set(h_tau21_ak8jet10, 0.);
+    event.set(h_tau32_ak8jet10, 0.);
+  }
+
+
+  /*
+  █  ██████  ███████ ███    ██ ███████ ██████   █████  ██
+  █ ██       ██      ████   ██ ██      ██   ██ ██   ██ ██
+  █ ██   ███ █████   ██ ██  ██ █████   ██████  ███████ ██
+  █ ██    ██ ██      ██  ██ ██ ██      ██   ██ ██   ██ ██
+  █  ██████  ███████ ██   ████ ███████ ██   ██ ██   ██ ███████
+  */
+
+  vector<Muon>* muons = event.muons;
+  event.set(h_n_mu, muons->size());
+  if(muons->size() > 0){
+    event.set(h_px_mu1, muons->at(0).v4().px());
+    event.set(h_py_mu1, muons->at(0).v4().py());
+    event.set(h_pz_mu1, muons->at(0).v4().pz());
+    event.set(h_pt_mu1, muons->at(0).pt());
+    event.set(h_eta_mu1, muons->at(0).eta());
+    event.set(h_phi_mu1, muons->at(0).phi());
+    event.set(h_e_mu1, muons->at(0).energy());
+    event.set(h_reliso_mu1, muons->at(0).relIso());
+    event.set(h_drmin_mu1_jet, muons->at(0).get_tag(Muon::twodcut_dRmin));
+    event.set(h_ptrel_mu1_jet, muons->at(0).get_tag(Muon::twodcut_pTrel));
+  }
+  else{
+    event.set(h_px_mu1, 0.);
+    event.set(h_py_mu1, 0.);
+    event.set(h_pz_mu1, 0.);
+    event.set(h_pt_mu1, 0.);
+    event.set(h_eta_mu1, 0.);
+    event.set(h_phi_mu1, 0.);
+    event.set(h_e_mu1, 0.);
+    event.set(h_reliso_mu1, 0.);
+    event.set(h_drmin_mu1_jet, 0.);
+    event.set(h_ptrel_mu1_jet, 0.);
+  }
+
+  vector<Electron>* electrons = event.electrons;
+  event.set(h_n_ele, electrons->size());
+  if(electrons->size() > 0){
+    event.set(h_px_ele1, electrons->at(0).v4().px());
+    event.set(h_py_ele1, electrons->at(0).v4().py());
+    event.set(h_pz_ele1, electrons->at(0).v4().pz());
+    event.set(h_pt_ele1, electrons->at(0).pt());
+    event.set(h_eta_ele1, electrons->at(0).eta());
+    event.set(h_phi_ele1, electrons->at(0).phi());
+    event.set(h_e_ele1, electrons->at(0).energy());
+    event.set(h_reliso_ele1, electrons->at(0).relIso());
+    event.set(h_drmin_ele1_jet, electrons->at(0).get_tag(Electron::twodcut_dRmin));
+    event.set(h_ptrel_ele1_jet, electrons->at(0).get_tag(Electron::twodcut_pTrel));
+  }
+  else{
+    event.set(h_px_ele1, 0.);
+    event.set(h_py_ele1, 0.);
+    event.set(h_pz_ele1, 0.);
+    event.set(h_pt_ele1, 0.);
+    event.set(h_eta_ele1, 0.);
+    event.set(h_phi_ele1, 0.);
+    event.set(h_e_ele1, 0.);
+    event.set(h_reliso_ele1, 0.);
+    event.set(h_drmin_ele1_jet, 0.);
+    event.set(h_ptrel_ele1_jet, 0.);
+  }
+
+  float met = event.met->pt();
+  double st = 0., stjets = 0., stlep = 0.;
+  for(const auto & jet : *jets)           stjets += jet.pt();
+  for(const auto & electron : *electrons) stlep += electron.pt();
+  for(const auto & muon : *muons)         stlep += muon.pt();
+  st = stjets + stlep + met;
+
+  event.set(h_npv, event.pvs->size());
+  event.set(h_met, met);
+  event.set(h_met_px, event.met->v4().px());
+  event.set(h_met_py, event.met->v4().py());
+  event.set(h_stjets, stjets);
+  event.set(h_stlep, stlep);
+  event.set(h_st, st);
+
+  bool is_zprime_reconstructed_chi2 = event.get(h_is_zprime_reconstructed_chi2);
+  if(is_zprime_reconstructed_chi2){
+    ZprimeCandidate* BestZprimeCandidate = event.get(h_BestZprimeCandidateChi2);
+    float mreco = BestZprimeCandidate->Zprime_v4().M();
+    float chi2 = BestZprimeCandidate->discriminator("chi2_total");
+
+    event.set(h_mzprime, mreco);
+    event.set(h_chi2zprime, chi2);
+  }
+  else{
+    event.set(h_mzprime, 0.);
+    event.set(h_chi2zprime, 0.);
+  }
+
+  // Sphericity tensor
+  double s11 = 0., s12 = 0., s13 = 0., s22 = 0., s23 = 0., s33 = 0., mag = 0.;
+  for(const Jet jet : *event.jets){
+    mag += (jet.v4().Px()*jet.v4().Px()+jet.v4().Py()*jet.v4().Py()+jet.v4().Pz()*jet.v4().Pz());
+    s11 += jet.v4().Px()*jet.v4().Px();
+    s12 += jet.v4().Px()*jet.v4().Py();
+    s13 += jet.v4().Px()*jet.v4().Pz();
+    s22 += jet.v4().Py()*jet.v4().Py();
+    s23 += jet.v4().Py()*jet.v4().Pz();
+    s33 += jet.v4().Pz()*jet.v4().Pz();
+  }
+  if(mag > 0){
+    s11 = s11 / mag;
+    s12 = s12 / mag;
+    s13 = s13 / mag;
+    s22 = s22 / mag;
+    s23 = s23 / mag;
+    s33 = s33 / mag;
+  }
+  else{
+    s11 = 0.;
+    s12 = 0.;
+    s13 = 0.;
+    s22 = 0.;
+    s23 = 0.;
+    s33 = 0.;
+  }
+
+  event.set(h_s11, s11);
+  event.set(h_s12, s12);
+  event.set(h_s13, s13);
+  event.set(h_s22, s22);
+  event.set(h_s23, s23);
+  event.set(h_s33, s33);
+
+  return true;
+}
 
 
 float inv_mass(const LorentzVector& p4){ return p4.isTimelike() ? p4.mass() : -sqrt(-p4.mass2()); }

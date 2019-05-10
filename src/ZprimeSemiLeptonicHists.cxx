@@ -14,8 +14,11 @@
 #include "TH2D.h"
 #include <iostream>
 
+#include <UHH2/Eigen/Eigen/Dense>
+
 using namespace std;
 using namespace uhh2;
+using Eigen::MatrixXd;
 
 ZprimeSemiLeptonicHists::ZprimeSemiLeptonicHists(uhh2::Context& ctx, const std::string& dirname):
 Hists(ctx, dirname) {
@@ -27,6 +30,9 @@ Hists(ctx, dirname) {
   h_BestZprimeCandidateCorrectMatch = ctx.get_handle<ZprimeCandidate*>("ZprimeCandidateBestCorrectMatch");
   h_is_zprime_reconstructed_chi2 = ctx.get_handle<bool>("is_zprime_reconstructed_chi2");
   h_is_zprime_reconstructed_correctmatch = ctx.get_handle<bool>("is_zprime_reconstructed_correctmatch");
+  // h_dnnoutput = ctx.get_handle<Matrix2D>("dnnoutput");
+  h_dnnoutput = ctx.get_handle<vector<double>>("dnnoutput");
+  h_is_dnn_predicted = ctx.get_handle<bool>("is_dnn_predicted");
   init();
 }
 
@@ -349,6 +355,18 @@ void ZprimeSemiLeptonicHists::init(){
   S22 = book<TH1F>("S22", "S_{22}", 50, 0, 1);
   S23 = book<TH1F>("S23", "S_{23}", 50, 0, 1);
   S33 = book<TH1F>("S33", "S_{33}", 50, 0, 1);
+
+  dnn_output_0 = book<TH1F>("dnn_output_0", "Classifier output node 0", 100, 0, 1.);
+  dnn_output_1 = book<TH1F>("dnn_output_1", "Classifier output node 1", 100, 0, 1.);
+  dnn_output_2 = book<TH1F>("dnn_output_2", "Classifier output node 2", 100, 0, 1.);
+  dnn_output_3 = book<TH1F>("dnn_output_3", "Classifier output node 3", 100, 0, 1.);
+  dnn_output_4 = book<TH1F>("dnn_output_4", "Classifier output node 4", 100, 0, 1.);
+
+  dnn_output_0_rebin = book<TH1F>("dnn_output_0_rebin", "Classifier output node 0", 10, 0, 1.);
+  dnn_output_1_rebin = book<TH1F>("dnn_output_1_rebin", "Classifier output node 1", 10, 0, 1.);
+  dnn_output_2_rebin = book<TH1F>("dnn_output_2_rebin", "Classifier output node 2", 10, 0, 1.);
+  dnn_output_3_rebin = book<TH1F>("dnn_output_3_rebin", "Classifier output node 3", 10, 0, 1.);
+  dnn_output_4_rebin = book<TH1F>("dnn_output_4_rebin", "Classifier output node 4", 10, 0, 1.);
 
   sum_event_weights = book<TH1F>("sum_event_weights", "counting experiment", 1, 0.5, 1.5);
 
@@ -937,6 +955,57 @@ void ZprimeSemiLeptonicHists::fill(const Event & event){
   S22->Fill(s22, weight);
   S23->Fill(s23, weight);
   S33->Fill(s33, weight);
+
+
+  bool is_dnn_predicted = event.get(h_is_dnn_predicted);
+  if(is_dnn_predicted){
+    // Matrix2D predictions = event.get(h_dnnoutput);
+    vector<double> predictions = event.get(h_dnnoutput);
+
+    // if(predictions[0][0] < 1) dnn_output_0->Fill(predictions[0][0], weight);
+    // else                      dnn_output_0->Fill(0.99999, weight);
+    // if(predictions[0][1] < 1) dnn_output_1->Fill(predictions[0][1], weight);
+    // else                      dnn_output_1->Fill(0.99999, weight);
+    // if(predictions[0][2] < 1) dnn_output_2->Fill(predictions[0][2], weight);
+    // else                      dnn_output_2->Fill(0.99999, weight);
+    // if(predictions[0][3] < 1) dnn_output_3->Fill(predictions[0][3], weight);
+    // else                      dnn_output_3->Fill(0.99999, weight);
+    // if(predictions[0][4] < 1) dnn_output_4->Fill(predictions[0][4], weight);
+    // else                      dnn_output_4->Fill(0.99999, weight);
+    //
+    // if(predictions[0][0] < 1) dnn_output_0_rebin->Fill(predictions[0][0], weight);
+    // else                      dnn_output_0_rebin->Fill(0.99999, weight);
+    // if(predictions[0][1] < 1) dnn_output_1_rebin->Fill(predictions[0][1], weight);
+    // else                      dnn_output_1_rebin->Fill(0.99999, weight);
+    // if(predictions[0][2] < 1) dnn_output_2_rebin->Fill(predictions[0][2], weight);
+    // else                      dnn_output_2_rebin->Fill(0.99999, weight);
+    // if(predictions[0][3] < 1) dnn_output_3_rebin->Fill(predictions[0][3], weight);
+    // else                      dnn_output_3_rebin->Fill(0.99999, weight);
+    // if(predictions[0][4] < 1) dnn_output_4_rebin->Fill(predictions[0][4], weight);
+    // else
+
+    if(predictions[0] < 1) dnn_output_0->Fill(predictions[0], weight);
+    else                      dnn_output_0->Fill(0.99999, weight);
+    if(predictions[1] < 1) dnn_output_1->Fill(predictions[1], weight);
+    else                      dnn_output_1->Fill(0.99999, weight);
+    if(predictions[2] < 1) dnn_output_2->Fill(predictions[2], weight);
+    else                      dnn_output_2->Fill(0.99999, weight);
+    if(predictions[3] < 1) dnn_output_3->Fill(predictions[3], weight);
+    else                      dnn_output_3->Fill(0.99999, weight);
+    if(predictions[4] < 1) dnn_output_4->Fill(predictions[4], weight);
+    else                      dnn_output_4->Fill(0.99999, weight);
+
+    if(predictions[0] < 1) dnn_output_0_rebin->Fill(predictions[0], weight);
+    else                      dnn_output_0_rebin->Fill(0.99999, weight);
+    if(predictions[1] < 1) dnn_output_1_rebin->Fill(predictions[1], weight);
+    else                      dnn_output_1_rebin->Fill(0.99999, weight);
+    if(predictions[2] < 1) dnn_output_2_rebin->Fill(predictions[2], weight);
+    else                      dnn_output_2_rebin->Fill(0.99999, weight);
+    if(predictions[3] < 1) dnn_output_3_rebin->Fill(predictions[3], weight);
+    else                      dnn_output_3_rebin->Fill(0.99999, weight);
+    if(predictions[4] < 1) dnn_output_4_rebin->Fill(predictions[4], weight);
+    else                      dnn_output_4_rebin->Fill(0.99999, weight);
+  }
 
 
   sum_event_weights->Fill(1., weight);

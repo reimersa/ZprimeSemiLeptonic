@@ -2,9 +2,11 @@ import os
 import sys
 import subprocess
 from multiprocessing import Process
+import ROOT
 
-from functions import *
-from constants import *
+from functions   import *
+from functions_ml import *
+from constants   import *
 
 
 #This file contains aaaaall the fancy functions and classes to clean up the steer.py code
@@ -192,6 +194,8 @@ class ModuleRunner:
         create_path(path_theta + 'input')
         create_path(path_theta + 'output')
         create_path('Plots/' + tag + '/CHSPuppiComparison')
+        create_path('Plots/DNNEfficiencies/' + dnntag + '/')
+        create_path('Plots/FitDistributions/')
 
         processes = []
         command = 'cp ' + path_theta_to_copy_from + '{limits_mc.py,limits_mc_puppi.py} ' + path_theta
@@ -207,16 +211,20 @@ class ModuleRunner:
         newlines = []
         for line in lines:
             newline = ''
-            if 'base_path_puppi' in line:
-                parts = line.split('"')
-                newline = parts[0] + '"' + fullsel_path_puppi + '"' + parts[2]
-            elif 'base_path_chs' in line:
-                parts = line.split('"')
-                newline = parts[0] + '"' + fullsel_path_chs + '"' + parts[2]
-            elif 'path_theta' in line:
+            # if 'base_path_puppi' in line:
+            #     parts = line.split('"')
+            #     newline = parts[0] + '"' + fullsel_path_puppi + '"' + parts[2]
+            # elif 'base_path_chs' in line:
+            #     parts = line.split('"')
+            #     newline = parts[0] + '"' + fullsel_path_chs + '"' + parts[2]
+            if 'path_theta' in line:
                 parts = line.split('"')
                 newline = parts[0] + '"' + path_theta + '"' + parts[2]
-            elif 'tag = ' in line:
+            # elif 'tag = ' in line:
+            elif 'dnntag = ' in line:
+                parts = line.split('"')
+                newline = parts[0] + '"' + dnntag + '"' + parts[2]
+            elif 'tag = ' in line and not '//' in line:
                 parts = line.split('"')
                 newline = parts[0] + '"' + tag + '"' + parts[2]
             elif 'signalmasses = {' in line:
@@ -233,7 +241,7 @@ class ModuleRunner:
 
     def CompileMacros(self):
         processes = []
-        command = 'make'
+        command = 'make clean; make;'
         processes.append(subprocess.Popen(command, shell=True))
         for p in processes:
             p.wait()
@@ -307,3 +315,45 @@ class ModuleRunner:
         proc = subprocess.Popen(command, shell=True, stdout=logfile, stderr=logfile)
         proc.wait()
         print 'plotter finished!'
+
+    def ReadoutMLVariables(self):
+        procnames = ['DATA', 'TTbar', 'QCD_Mu', 'ST', 'DYJets', 'WJets', 'RSGluon', 'RSGluon_M1000', 'RSGluon_M2000', 'RSGluon_M3000', 'RSGluon_M4000', 'RSGluon_M5000', 'RSGluon_M6000']
+        # procnames = ['DYJets']
+        # procnames = ['RSGluon_M1000', 'RSGluon_M2000', 'RSGluon_M3000', 'RSGluon_M4000', 'RSGluon_M5000', 'RSGluon_M6000']
+        # procnames = ['TTbar', 'QCD_Mu', 'ST', 'DYJets', 'WJets', 'RSGluon']
+        inpath = ''
+        if do_puppi: inpath = fullsel_path_puppi
+        else: inpath = fullsel_path_chs
+        fullinpath = inpath + '/NOMINAL/uhh2.AnalysisModuleRunner.'
+        for proc in procnames:
+            filename = fullinpath
+            if not proc == 'DATA':
+                filename += 'MC.' + proc + '.root'
+            else:
+                filename += 'DATA.' + proc + '.root'
+            outpath = inpath + '/NOMINAL/'
+            procoutname = proc
+            if proc == 'RSGluon':
+                procoutname = 'RSGluon_All'
+            readout_to_numpy_arrays(infilename=filename, treename='AnalysisTree', outpath=outpath, outname=procoutname)
+
+    def ReadoutMLVariablesReduced(self):
+        procnames = ['TTbar', 'QCD_Mu', 'ST', 'DYJets', 'WJets', 'RSGluon', 'RSGluon_M1000', 'RSGluon_M2000', 'RSGluon_M3000', 'RSGluon_M4000', 'RSGluon_M5000', 'RSGluon_M6000']
+        # procnames = ['DYJets']
+        # procnames = ['RSGluon_M1000', 'RSGluon_M2000', 'RSGluon_M3000', 'RSGluon_M4000', 'RSGluon_M5000', 'RSGluon_M6000']
+        # procnames = ['TTbar', 'QCD_Mu', 'ST', 'DYJets', 'WJets', 'RSGluon']
+        inpath = ''
+        if do_puppi: inpath = fullsel_path_puppi
+        else: inpath = fullsel_path_chs
+        fullinpath = inpath + '/NOMINAL/uhh2.AnalysisModuleRunner.'
+        for proc in procnames:
+            filename = fullinpath
+            if not proc == 'DATA':
+                filename += 'MC.' + proc + '.root'
+            else:
+                filename += 'DATA.' + proc + '.root'
+            outpath = inpath + '/NOMINAL/'
+            procoutname = proc
+            if proc == 'RSGluon':
+                procoutname = 'RSGluon_All'
+            readout_to_numpy_arrays_reduced(infilename=filename, treename='AnalysisTree', outpath=outpath, outname=procoutname)

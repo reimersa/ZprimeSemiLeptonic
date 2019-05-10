@@ -38,8 +38,15 @@
 #include <UHH2/common/include/TTbarReconstruction.h>
 #include <UHH2/common/include/ReconstructionHypothesisDiscriminators.h>
 
+#include <UHH2/common/include/NeuralNetworkBase.hpp>
+
+#include <UHH2/Eigen/Eigen/Dense>
+
 using namespace std;
 using namespace uhh2;
+
+
+typedef std::vector < std::vector < double > > Matrix2D;
 
 /*
 ██████  ███████ ███████ ██ ███    ██ ██ ████████ ██  ██████  ███    ██
@@ -74,18 +81,29 @@ protected:
   // Mass reconstruction
   unique_ptr<ZprimeCandidateBuilder> CandidateBuilder;
 
+  // Handle builder
+  unique_ptr<ZprimeHandleBuilder> HandleBuilder_module;
+
   // Chi2 discriminator
   unique_ptr<ZprimeChi2Discriminator> Chi2DiscriminatorZprime;
   unique_ptr<ZprimeCorrectMatchDiscriminator> CorrectMatchDiscriminatorZprime;
 
   // Selections
   unique_ptr<Selection> Trigger1_selection, Trigger2_selection, Trigger3_selection, NMuon1_selection, NMuon2_selection, NElectron_selection, TwoDCut_selection, Jet1_selection, Jet2_selection, STlepPlusMet_selection, Chi2_selection, TTbarMatchable_selection, Chi2CandidateMatched_selection, ZprimeTopTag_selection, BlindData_selection;
+  unique_ptr<Selection> DNN_selection_node0_010, DNN_selection_node0_020, DNN_selection_node0_030, DNN_selection_node0_040, DNN_selection_node0_050, DNN_selection_node0_060, DNN_selection_node0_070, DNN_selection_node0_080, DNN_selection_node0_090, DNN_selection_node0_096;
+  unique_ptr<Selection> DNN_selection_node3_010, DNN_selection_node3_020, DNN_selection_node3_030, DNN_selection_node3_040, DNN_selection_node3_050, DNN_selection_node3_060, DNN_selection_node3_070, DNN_selection_node3_080, DNN_selection_node3_090, DNN_selection_node3_096;
 
-  //Handles
+  // Handles
   Event::Handle<bool> h_is_zprime_reconstructed_chi2, h_is_zprime_reconstructed_correctmatch;
 
+  // DNN
+  unique_ptr<NeuralNetworkBase> DNNClassifier;
+  // Event::Handle<Matrix2D> h_dnnoutput;
+  Event::Handle<std::vector<double>> h_dnnoutput;
+  Event::Handle<bool> h_is_dnn_predicted;
+
   // Configuration
-  bool isMC, ispuppi, islooserselection;
+  bool isMC, ispuppi, islooserselection, isforml, usednn;
   string Sys_MuonID, Sys_MuonTrigger, Sys_PU;
   TString sample;
   int runnr_oldtriggers = 299368;
@@ -158,8 +176,8 @@ ZprimeAnalysisModule::ZprimeAnalysisModule(uhh2::Context& ctx){
   double TwoD_dr = 0.4, TwoD_ptrel = 25.;
   if(islooserselection){
     jet1_pt = 100.;
-    TwoD_dr = 0.2;
-    TwoD_ptrel = 10.;
+    TwoD_dr = 0.05;
+    TwoD_ptrel = 3.;
     stlep_plus_met = 100.;
   }
   const MuonId muonID(PtEtaCut(muon_pt, 2.4));
@@ -168,6 +186,8 @@ ZprimeAnalysisModule::ZprimeAnalysisModule(uhh2::Context& ctx){
   // Configuration
   isMC = (ctx.get("dataset_type") == "MC");
   ispuppi = (ctx.get("is_puppi") == "true");
+  isforml = (ctx.get("is_for_ml") == "true");
+  usednn  = (ctx.get("use_dnn") == "true");
   TString mode = "chs";
   if(ispuppi) mode = "puppi";
   string tmp = ctx.get("dataset_version");
@@ -176,15 +196,34 @@ ZprimeAnalysisModule::ZprimeAnalysisModule(uhh2::Context& ctx){
   Sys_MuonTrigger = ctx.get("Sys_MuonTrigger");
   Sys_PU = ctx.get("Sys_PU");
 
-  // Modules
+  // cleaners and scale factors
   printer_genparticles.reset(new GenParticlesPrinter(ctx));
   muon_cleaner.reset(new MuonCleaner(muonID));
   MuonID_module.reset(new MCMuonScaleFactor(ctx, "/nfs/dust/cms/user/reimersa/CMSSW_9_4_1/src/UHH2/common/data/MuonID_94X_RunBCDEF_SF_ID.root", "NUM_HighPtID_DEN_genTracks_pair_newTuneP_probe_pt_abseta", 0., "HighPtID", true, Sys_MuonID));
   MuonTrigger_module.reset(new MCMuonScaleFactor(ctx, "/nfs/dust/cms/user/reimersa/CMSSW_9_4_1/src/UHH2/common/data/MuonTrigger_EfficienciesAndSF_RunBtoF_Nov17Nov2017.root", "Mu50_PtEtaBins/pt_abseta_ratio", 0.5, "Trigger", true, Sys_MuonTrigger));
-
   LumiWeight_module.reset(new MCLumiWeight(ctx));
   PUWeight_module.reset(new MCPileupReweight(ctx, Sys_PU));
   CSVWeight_module.reset(new MCCSVv2ShapeSystematic(ctx, "jets","central","iterativefit","","MCCSVv2ShapeSystematic"));
+
+  // Handle builder
+  if(isforml){
+    ctx.undeclare_all_event_output();
+  }
+  HandleBuilder_module.reset(new ZprimeHandleBuilder(ctx));
+
+  // DNN
+  if(usednn) DNNClassifier.reset(new NeuralNetworkBase(ctx, "../DNNWeights"));
+  if(!isforml){
+    // h_dnnoutput = ctx.declare_event_output<Matrix2D>("dnnoutput");
+    h_dnnoutput = ctx.declare_event_output<vector<double>>("dnnoutput");
+    h_is_dnn_predicted = ctx.declare_event_output<bool>("is_dnn_predicted");
+  }
+  else{
+    // h_dnnoutput = ctx.get_handle<Matrix2D>("dnnoutput");
+    h_dnnoutput = ctx.get_handle<vector<double>>("dnnoutput");
+    h_is_dnn_predicted = ctx.get_handle<bool>("is_dnn_predicted");
+  }
+
 
   // Selection modules
   Trigger1_selection.reset(new TriggerSelection(trigger1));
@@ -216,8 +255,9 @@ ZprimeAnalysisModule::ZprimeAnalysisModule(uhh2::Context& ctx){
   h_is_zprime_reconstructed_correctmatch = ctx.get_handle<bool>("is_zprime_reconstructed_correctmatch");
 
   // Book histograms
-  vector<string> histogram_tags = {"Weights", "Muon1", "Trigger", "Muon2", "Electron1", "TwoDCut", "Jet1", "Jet2", "STlepPlusMet", "MatchableBeforeChi2Cut", "NotMatchableBeforeChi2Cut", "CorrectMatchBeforeChi2Cut", "NotCorrectMatchBeforeChi2Cut", "Chi2", "Matchable", "NotMatchable", "CorrectMatch", "NotCorrectMatch", "TopTagReconstruction", "NotTopTagReconstruction"};
+  vector<string> histogram_tags = {"Weights", "Muon1", "Trigger", "Muon2", "Electron1", "DNN", "TwoDCut", "Jet1", "Jet2", "STlepPlusMet", "MatchableBeforeChi2Cut", "NotMatchableBeforeChi2Cut", "CorrectMatchBeforeChi2Cut", "NotCorrectMatchBeforeChi2Cut", "Chi2", "Matchable", "NotMatchable", "CorrectMatch", "NotCorrectMatch", "TopTagReconstruction", "NotTopTagReconstruction"};
   book_histograms(ctx, histogram_tags);
+
 }
 
 /*
@@ -235,6 +275,9 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   // Initialize reco flags with false
   event.set(h_is_zprime_reconstructed_chi2, false);
   event.set(h_is_zprime_reconstructed_correctmatch, false);
+  event.set(h_is_dnn_predicted, false);
+  event.set(h_dnnoutput, vector<double>(0));
+
 
   // Printing
   // if(!event.isRealData) printer_genparticles->process(event);
@@ -271,17 +314,43 @@ bool ZprimeAnalysisModule::process(uhh2::Event& event){
   if(!NElectron_selection->passes(event)) return false;
   fill_histograms(event, "Electron1");
 
-  if(!TwoDCut_selection->passes(event)) return false;
-  fill_histograms(event, "TwoDCut");
-
   // Here, the Zprime must be reconstructed (we ensured to have >= 2 AK4 jets, >= 1 muon)
   CandidateBuilder->process(event);
   Chi2DiscriminatorZprime->process(event);
   CorrectMatchDiscriminatorZprime->process(event);
 
+  // Blind data
   if(sample.Contains("_blinded")){
     if(!BlindData_selection->passes(event)) return false;
   }
+
+  // Do DNN stuff
+  if (usednn || isforml){
+    HandleBuilder_module->process(event);
+  }
+
+  if(usednn){
+    DNNClassifier->Apply(event);
+    Eigen::MatrixXd predictions = DNNClassifier->getOutputs();
+
+    vector<double> dnnout_vector;
+    for(int i=0; i<predictions.cols(); i++){
+      dnnout_vector.emplace_back(predictions(0,i));
+    }
+
+    event.set(h_dnnoutput, dnnout_vector);
+    event.set(h_is_dnn_predicted, true);
+  }
+  fill_histograms(event, "DNN");
+
+  if(isforml || usednn){
+    return true;
+  }
+
+
+
+  if(!TwoDCut_selection->passes(event)) return false;
+  fill_histograms(event, "TwoDCut");
 
   if(!Jet1_selection->passes(event)) return false;
   fill_histograms(event, "Jet1");

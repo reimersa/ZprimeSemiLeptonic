@@ -16,8 +16,24 @@
 #include <vector>
 #include <unordered_map>
 
+
+typedef std::vector < std::vector < double > > Matrix2D;
+
 namespace uhh2 {
 
+
+
+  class DNNSelection : public Selection{
+  public:
+    explicit DNNSelection(uhh2::Context&, int node, float minval);
+    virtual bool passes(const Event&) override;
+
+  private:
+    uhh2::Event::Handle<std::vector<double>> h_dnnoutput;
+    uhh2::Event::Handle<bool> h_is_dnn_predicted;
+    int node_;
+    float minval_;
+  };
 
 
   class BlindDataSelection : public Selection{

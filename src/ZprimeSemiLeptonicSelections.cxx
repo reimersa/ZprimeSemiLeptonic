@@ -14,6 +14,20 @@
 
 using namespace std;
 
+DNNSelection::DNNSelection(Context& ctx, int node, float minval) : node_(node), minval_(minval){
+
+  h_dnnoutput = ctx.get_handle<vector<double>>("dnnoutput");
+  h_is_dnn_predicted = ctx.get_handle<bool>("is_dnn_predicted");
+
+}
+bool DNNSelection::passes(const Event & event){
+
+  bool is_dnn_predicted = event.get(h_is_dnn_predicted);
+  if(!is_dnn_predicted) throw runtime_error("In ZprimeSemiLeptonicSelections.cxx:DNNSelection::passes(): DNN didn't do predictions yet.");
+
+  vector<double> dnnoutput = event.get(h_dnnoutput);
+  return dnnoutput[node_] >= minval_;
+}
 
 BlindDataSelection::BlindDataSelection(Context& ctx, float mtt_max) : mtt_max_(mtt_max){
   h_BestZprimeCandidate_chi2 = ctx.get_handle<ZprimeCandidate*>("ZprimeCandidateBestChi2");

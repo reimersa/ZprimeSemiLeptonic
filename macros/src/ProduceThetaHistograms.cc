@@ -28,12 +28,18 @@ void AnalysisTool::ProduceThetaHistograms(){
 
   vector<TString> samples = {"DYJets", "QCD_Mu", "ST", "TTbar", "WJets", "RSGluon_M500", "RSGluon_M750", "RSGluon_M1000", "RSGluon_M1250", "RSGluon_M1500", "RSGluon_M2000", "RSGluon_M2500", "RSGluon_M3000", "RSGluon_M3500", "RSGluon_M4000", "RSGluon_M4500", "RSGluon_M5000", "RSGluon_M5500", "RSGluon_M6000", "RSGluon_M6500", "RSGluon_M7000", "RSGluon_M7500", "RSGluon_M8000", "DATA"};
 
+  // vector<TString> histnames = {"TopTagReconstruction_General/M_Zprime_rebin5", "NotTopTagReconstruction_General/M_Zprime_rebin4", "QCD_CR_General/M_Zprime_rebin4", "WJets_CR_General/M_Zprime_rebin4", "DYJets_CR_General/M_Zprime_rebin4"};
   vector<TString> histnames = {"TopTagReconstruction_General/M_Zprime_rebin5", "NotTopTagReconstruction_General/M_Zprime_rebin4"};
+  // vector<TString> histoutnames_base = {"MZprime_toptag__", "MZprime_nottoptag__", "MZprime_QCD__", "MZprime_WJets__", "MZprime_DYJets__"};
   vector<TString> histoutnames_base = {"MZprime_toptag__", "MZprime_nottoptag__"};
+  // vector<TString> histnames = {"Chi2_General/M_Zprime_rebin4"};
+  // vector<TString> histoutnames_base = {"MZprime__"};
+
 
   TString dir = "";
   if(AnalysisTool::do_puppi) dir = AnalysisTool::base_path_puppi;
   else dir = AnalysisTool::base_path_chs;
+  dir = AnalysisTool::dnn_path_puppi;
   dir += "/NOMINAL/";
   TString filename_base = "uhh2.AnalysisModuleRunner.";
 
@@ -51,6 +57,9 @@ void AnalysisTool::ProduceThetaHistograms(){
 
     for(unsigned int j=0; j<histnames.size(); j++){
       TH1F* h_in = (TH1F*)f_in->Get(histnames[j]);
+      // if(sample == "QCD_Mu"){
+      //   for(int k=1; k<h_in->GetNbinsX()+1; k++) h_in->SetBinError(k, 0.);
+      // }
 
       TString hist_outname = histoutnames_base[j] + sample;
       h_in->SetName(hist_outname);

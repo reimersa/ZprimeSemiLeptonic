@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
   if(argc != 3) throw runtime_error("Expected exactly two arguments .");
 
   cout << "Arguments given: ";
-  for(int i=1; i<3; i++) cout << argv[i];
+  for(int i=1; i<3; i++) cout << argv[i] << " ";
   cout << endl;
 
 
@@ -26,10 +26,17 @@ int main(int argc, char* argv[]){
   if(!strcmp(argv[1], "CalculateReconstructionQuality") || !strcmp(argv[1], "All")) Analysis.CalculateReconstructionQuality();
   if(!strcmp(argv[1], "CalculateChi2Values") || !strcmp(argv[1], "All")) Analysis.CalculateChi2Values();
   if(!strcmp(argv[1], "CompareCHSPuppi") || !strcmp(argv[1], "All")) Analysis.CompareCHSPuppi();
+  if(!strcmp(argv[1], "CompareShapes") || !strcmp(argv[1], "All")) Analysis.CompareShapes();
+  if(!strcmp(argv[1], "FitDistributions") || !strcmp(argv[1], "All")) Analysis.FitDistributions();
+  if(!strcmp(argv[1], "ExtrapolateData") || !strcmp(argv[1], "All")) Analysis.ExtrapolateData();
+  if(!strcmp(argv[1], "CalculateBackgroundComposition") || !strcmp(argv[1], "All")) Analysis.CalculateBackgroundComposition();
   if(!strcmp(argv[1], "ProduceThetaHistograms") || !strcmp(argv[1], "All")) Analysis.ProduceThetaHistograms();
+  if(!strcmp(argv[1], "ProduceThetaDNNHistograms") || !strcmp(argv[1], "All")) Analysis.ProduceThetaDNNHistograms();
   if(!strcmp(argv[1], "PlotLimits") || !strcmp(argv[1], "All")) Analysis.PlotLimits();
   if(!strcmp(argv[1], "PlotPostfitDistributions") || !strcmp(argv[1], "All")) Analysis.PlotPostfitDistributions();
   if(!strcmp(argv[1], "PlotPostfitParameters") || !strcmp(argv[1], "All")) Analysis.PlotPostfitParameters();
+  if(!strcmp(argv[1], "CalculateDNNEfficiencies") || !strcmp(argv[1], "All")) Analysis.CalculateDNNEfficiencies();
+  if(!strcmp(argv[1], "CalculateDNNOutputCuts") || !strcmp(argv[1], "All")) Analysis.CalculateDNNOutputCuts();
 
 
   cout << "Finished main(). Good-bye." << endl;

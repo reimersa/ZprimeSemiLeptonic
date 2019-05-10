@@ -1,7 +1,11 @@
 
 do_puppi = True
 preseltag = '2017_Moriond19JEC'
-tag = preseltag + '_looserselection'
+# tag = preseltag + '_RightLumiweights_forml_morevar'
+# tag = preseltag + '_RightLumiweights'
+tag = '2017_WithDNN_Fixed'
+dnntag = '2017_WithDNN_Fixed_Cuts'
+# tag = dnntag
 
 path_ZPRIMEDIR = '/nfs/dust/cms/user/reimersa/CMSSW_9_4_1/src/UHH2/ZprimeSemiLeptonic'
 name_PRESEL_SR = 'ZprimePreselection_Puppi.xml'
@@ -11,7 +15,11 @@ presel_path_puppi = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/Prese
 presel_path_chs = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/Preselection/' + preseltag
 fullsel_path_puppi = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/Fullselection/' + tag + '_Puppi'
 fullsel_path_chs = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/Fullselection/' + tag
-path_theta = '/nfs/dust/cms/user/reimersa/theta_Zprime/utils2/' + tag + '/'
+dnnsel_path_puppi = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/DNNSelection/'+dnntag+'_Puppi'
+dnnsel_path_chs = '/nfs/dust/cms/user/reimersa/ZprimeSemiLeptonic/94X_v1/DNNSelection/'+dnntag
+
+# path_theta = '/nfs/dust/cms/user/reimersa/theta_Zprime/utils2/' + tag + '/'
+path_theta = '/nfs/dust/cms/user/reimersa/theta_Zprime/utils2/' + dnntag + '_Puppi/'
 path_theta_to_copy_from = '/nfs/dust/cms/user/reimersa/theta_Zprime/utils2/Limits_MC/'
 path_plotter = '/nfs/dust/cms/user/reimersa/SFramePlotter/'
 steerfilename = 'Zprime/Fullselection_blinded.steer'

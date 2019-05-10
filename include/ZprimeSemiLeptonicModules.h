@@ -7,6 +7,28 @@
 #include <UHH2/core/include/LorentzVector.h>
 #include <UHH2/common/include/TTbarGen.h>
 
+
+
+class ZprimeHandleBuilder : uhh2::AnalysisModule{
+
+public:
+  explicit ZprimeHandleBuilder(uhh2::Context&);
+  virtual bool process(uhh2::Event&) override;
+
+private:
+  uhh2::Event::Handle< float > h_eventweight, h_pt_jet1, h_pt_jet2, h_pt_jet3, h_pt_jet4, h_pt_jet5, h_pt_jet6, h_pt_jet7, h_pt_jet8, h_pt_jet9, h_pt_jet10, h_px_jet1, h_px_jet2, h_px_jet3, h_px_jet4, h_px_jet5, h_px_jet6, h_px_jet7, h_px_jet8, h_px_jet9, h_px_jet10, h_py_jet1, h_py_jet2, h_py_jet3, h_py_jet4, h_py_jet5, h_py_jet6, h_py_jet7, h_py_jet8, h_py_jet9, h_py_jet10, h_pz_jet1, h_pz_jet2, h_pz_jet3, h_pz_jet4, h_pz_jet5, h_pz_jet6, h_pz_jet7, h_pz_jet8, h_pz_jet9, h_pz_jet10, h_e_jet1, h_e_jet2, h_e_jet3, h_e_jet4, h_e_jet5, h_e_jet6, h_e_jet7, h_e_jet8, h_e_jet9, h_e_jet10, h_eta_jet1, h_eta_jet2, h_eta_jet3, h_eta_jet4, h_eta_jet5, h_eta_jet6, h_eta_jet7, h_eta_jet8, h_eta_jet9, h_eta_jet10, h_phi_jet1, h_phi_jet2, h_phi_jet3, h_phi_jet4, h_phi_jet5, h_phi_jet6, h_phi_jet7, h_phi_jet8, h_phi_jet9, h_phi_jet10, h_m_jet1, h_m_jet2, h_m_jet3, h_m_jet4, h_m_jet5, h_m_jet6, h_m_jet7, h_m_jet8, h_m_jet9, h_m_jet10, h_csv_jet1, h_csv_jet2, h_csv_jet3, h_csv_jet4, h_csv_jet5, h_csv_jet6, h_csv_jet7, h_csv_jet8, h_csv_jet9, h_csv_jet10;
+  uhh2::Event::Handle< float > h_pt_ak8jet1, h_pt_ak8jet2, h_pt_ak8jet3, h_pt_ak8jet4, h_pt_ak8jet5, h_pt_ak8jet6, h_pt_ak8jet7, h_pt_ak8jet8, h_pt_ak8jet9, h_pt_ak8jet10, h_px_ak8jet1, h_px_ak8jet2, h_px_ak8jet3, h_px_ak8jet4, h_px_ak8jet5, h_px_ak8jet6, h_px_ak8jet7, h_px_ak8jet8, h_px_ak8jet9, h_px_ak8jet10, h_py_ak8jet1, h_py_ak8jet2, h_py_ak8jet3, h_py_ak8jet4, h_py_ak8jet5, h_py_ak8jet6, h_py_ak8jet7, h_py_ak8jet8, h_py_ak8jet9, h_py_ak8jet10, h_pz_ak8jet1, h_pz_ak8jet2, h_pz_ak8jet3, h_pz_ak8jet4, h_pz_ak8jet5, h_pz_ak8jet6, h_pz_ak8jet7, h_pz_ak8jet8, h_pz_ak8jet9, h_pz_ak8jet10, h_e_ak8jet1, h_e_ak8jet2, h_e_ak8jet3, h_e_ak8jet4, h_e_ak8jet5, h_e_ak8jet6, h_e_ak8jet7, h_e_ak8jet8, h_e_ak8jet9, h_e_ak8jet10, h_eta_ak8jet1, h_eta_ak8jet2, h_eta_ak8jet3, h_eta_ak8jet4, h_eta_ak8jet5, h_eta_ak8jet6, h_eta_ak8jet7, h_eta_ak8jet8, h_eta_ak8jet9, h_eta_ak8jet10, h_phi_ak8jet1, h_phi_ak8jet2, h_phi_ak8jet3, h_phi_ak8jet4, h_phi_ak8jet5, h_phi_ak8jet6, h_phi_ak8jet7, h_phi_ak8jet8, h_phi_ak8jet9, h_phi_ak8jet10, h_msd_ak8jet1, h_msd_ak8jet2, h_msd_ak8jet3, h_msd_ak8jet4, h_msd_ak8jet5, h_msd_ak8jet6, h_msd_ak8jet7, h_msd_ak8jet8, h_msd_ak8jet9, h_msd_ak8jet10, h_tau1_ak8jet1, h_tau1_ak8jet2, h_tau1_ak8jet3, h_tau1_ak8jet4, h_tau1_ak8jet5, h_tau1_ak8jet6, h_tau1_ak8jet7, h_tau1_ak8jet8, h_tau1_ak8jet9, h_tau1_ak8jet10, h_tau2_ak8jet1, h_tau2_ak8jet2, h_tau2_ak8jet3, h_tau2_ak8jet4, h_tau2_ak8jet5, h_tau2_ak8jet6, h_tau2_ak8jet7, h_tau2_ak8jet8, h_tau2_ak8jet9, h_tau2_ak8jet10, h_tau3_ak8jet1, h_tau3_ak8jet2, h_tau3_ak8jet3, h_tau3_ak8jet4, h_tau3_ak8jet5, h_tau3_ak8jet6, h_tau3_ak8jet7, h_tau3_ak8jet8, h_tau3_ak8jet9, h_tau3_ak8jet10, h_tau21_ak8jet1, h_tau21_ak8jet2, h_tau21_ak8jet3, h_tau21_ak8jet4, h_tau21_ak8jet5, h_tau21_ak8jet6, h_tau21_ak8jet7, h_tau21_ak8jet8, h_tau21_ak8jet9, h_tau21_ak8jet10, h_tau32_ak8jet1, h_tau32_ak8jet2, h_tau32_ak8jet3, h_tau32_ak8jet4, h_tau32_ak8jet5, h_tau32_ak8jet6, h_tau32_ak8jet7, h_tau32_ak8jet8, h_tau32_ak8jet9, h_tau32_ak8jet10;
+  uhh2::Event::Handle< float > h_px_mu1, h_py_mu1, h_pz_mu1, h_pt_mu1, h_eta_mu1, h_phi_mu1, h_e_mu1, h_reliso_mu1, h_drmin_mu1_jet, h_ptrel_mu1_jet;
+  uhh2::Event::Handle< float > h_px_ele1, h_py_ele1, h_pz_ele1, h_pt_ele1, h_eta_ele1, h_phi_ele1, h_e_ele1, h_reliso_ele1, h_drmin_ele1_jet, h_ptrel_ele1_jet;
+  uhh2::Event::Handle< float > h_met_px, h_met_py, h_met, h_stjets, h_stlep, h_st, h_mzprime, h_chi2zprime, h_s11, h_s12, h_s13, h_s22, h_s23, h_s33;
+  uhh2::Event::Handle< int > h_n_jets, h_n_bjets_loose, h_n_bjets_med, h_n_bjets_tight, h_n_ak8jets, h_ndaughters_ak8jet1, h_ndaughters_ak8jet2, h_ndaughters_ak8jet3, h_ndaughters_ak8jet4, h_ndaughters_ak8jet5, h_ndaughters_ak8jet6, h_ndaughters_ak8jet7, h_ndaughters_ak8jet8, h_ndaughters_ak8jet9, h_ndaughters_ak8jet10, h_n_mu, h_n_ele, h_npv;
+
+
+  uhh2::Event::Handle<bool> h_is_zprime_reconstructed_chi2;
+  uhh2::Event::Handle<ZprimeCandidate*> h_BestZprimeCandidateChi2;
+
+};
+
 float inv_mass(const LorentzVector&);
 
 class ZprimeCandidateBuilder : uhh2::AnalysisModule{

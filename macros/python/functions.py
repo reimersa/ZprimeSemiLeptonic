@@ -203,10 +203,10 @@ def submit_missing(path, filename, nice=10, maxjobs=25):
                     # print 'Job "%s" has finished.' % proc[1].name
                     print 'Job with logfile {} has finished.'.format(proc[1].name[proc[1].name.rfind('/')+1:proc[1].name.rfind('.')])
         percent = float(ncompleted)/float(ntotal)*100
-        sys.stdout.write( '{0:d} of {1:d} ({2:4.2f} %) jobs done.\r'.format(ncompleted, njobs, percent))
+        sys.stdout.write( '{0:d} of {1:d} ({2:4.2f} %) jobs done.\r'.format(ncompleted, ntotal, percent))
         sys.stdout.flush()
         time.sleep(10)
-        wait = (ncompleted < njobs)
+        wait = (ncompleted < ntotal)
     print ''
     print 'Done'
     os.chdir(cwd)

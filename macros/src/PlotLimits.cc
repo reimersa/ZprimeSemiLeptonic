@@ -38,6 +38,8 @@ void AnalysisTool::PlotLimits(bool draw_data){
   //0) general cosmetics
   cosmetics();
 
+  bool draw_classic_result = true;
+
 
   TString filename = AnalysisTool::path_theta + "output/";
   TString txtname;
@@ -76,8 +78,48 @@ void AnalysisTool::PlotLimits(bool draw_data){
     observed.emplace_back(val);
     myfile >> val; // Skip the uncertainty on obs
   }
+  myfile.clear();
 
+  vector<float> theory_x, theory_y;
+  float k_nlo = 1.3;
+  theory_x.emplace_back(500.);
+  theory_x.emplace_back(750.);
+  theory_x.emplace_back(1000.);
+  theory_x.emplace_back(1250.);
+  theory_x.emplace_back(1500.);
+  theory_x.emplace_back(2000.);
+  theory_x.emplace_back(2500.);
+  theory_x.emplace_back(3000.);
+  theory_x.emplace_back(3500.);
+  theory_x.emplace_back(4000.);
+  theory_x.emplace_back(4500.);
+  theory_x.emplace_back(5000.);
 
+  theory_y.emplace_back(275.9*k_nlo);
+  theory_y.emplace_back(62.41*k_nlo);
+  theory_y.emplace_back(20.05*k_nlo);
+  theory_y.emplace_back(7.92*k_nlo);
+  theory_y.emplace_back(3.519*k_nlo);
+  theory_y.emplace_back(0.9528*k_nlo);
+  theory_y.emplace_back(0.3136*k_nlo);
+  theory_y.emplace_back(0.1289*k_nlo);
+  theory_y.emplace_back(0.0545*k_nlo);
+  theory_y.emplace_back(0.02807*k_nlo);
+  theory_y.emplace_back(0.01603*k_nlo);
+  theory_y.emplace_back(0.009095*k_nlo);
+
+  vector<double> expected_classical;
+  filename = "/nfs/dust/cms/user/reimersa/theta_Zprime/utils2/2017_Moriond19JEC_RightLumiweights/output/expected_limits_puppi.txt";
+  myfile = ifstream(filename);
+  while(!myfile.eof()){
+    myfile >> val;
+    myfile >> val;
+    expected_classical.emplace_back(val);
+    myfile >> val;
+    myfile >> val;
+    myfile >> val;
+    myfile >> val;
+  }
   myfile.clear();
 
 
@@ -99,6 +141,11 @@ void AnalysisTool::PlotLimits(bool draw_data){
   TGraph* g_expected = new TGraph(expected.size(),&mass[0],&expected[0]);
   TGraph* g_observed = new TGraph(expected.size(),&mass[0],&observed[0]);
 
+  TGraph* g_theory = new TGraph(theory_x.size(), &theory_x[0], &theory_y[0]);
+
+  TGraph* g_expected_classical = new TGraph(expected_classical.size(),&mass[0],&expected_classical[0]);
+
+
   //7) cosmetics
   g_expected->SetLineWidth(3);
   g_expected->SetLineStyle(2);
@@ -112,8 +159,16 @@ void AnalysisTool::PlotLimits(bool draw_data){
   g_expected_95->SetLineWidth(0);
 
   g_expected_95->SetMaximum(10000);
-  g_expected_95->SetMinimum(5E-5);
+  g_expected_95->SetMinimum(5E-3);
   g_expected_95->SetTitle("");
+
+  g_theory->SetLineWidth(3);
+  g_theory->SetLineStyle(9);
+  g_theory->SetLineColor(kRed+1);
+
+  g_expected_classical->SetLineWidth(3);
+  g_expected_classical->SetLineStyle(9);
+  g_expected_classical->SetLineColor(kMagenta+1);
 
   //8) Draw Graphs
   TCanvas* c = new TCanvas("c", "Nice limit plot", 800,600);
@@ -122,10 +177,13 @@ void AnalysisTool::PlotLimits(bool draw_data){
   g_expected_68->Draw("3 SAME");
   g_expected->Draw("SAME");
   if(draw_data) g_observed->Draw("SAME");
+  if(draw_classic_result) g_expected_classical->Draw("SAME");
+  g_theory->Draw("SAME");
+
 
   //9) Legend
   TLegend *leg;
-  leg = new TLegend(0.60,0.67,0.95,0.92,"");
+  leg = new TLegend(0.60,0.57,0.95,0.92,"");
   leg->SetBorderSize(0);
   leg->SetTextSize(0.030);
   leg->SetFillStyle(0);
@@ -138,6 +196,9 @@ void AnalysisTool::PlotLimits(bool draw_data){
   leg->AddEntry(g_expected, "Expected","L");
   leg->AddEntry(g_expected_68, "68% expected","F");
   leg->AddEntry(g_expected_95, "95% expected","F");
+  if(draw_classic_result) leg->AddEntry(g_expected_classical, "Expected (w/o DNN)","L");
+  leg->AddEntry(g_theory, " ", "");
+  leg->AddEntry(g_theory, "g_{KK} (LO #times 1.3)", "L");
   leg->Draw();
 
   //10) CMS tags
@@ -161,7 +222,7 @@ void AnalysisTool::PlotLimits(bool draw_data){
   text2->SetY(0.905);
   text2->Draw();
 
-  TString preltext = "Supplementary";
+  TString preltext = "Simulation";
   TLatex *text3 = new TLatex(3.5, 24, preltext);
   text3->SetNDC();
   text3->SetTextAlign(13);
@@ -169,26 +230,37 @@ void AnalysisTool::PlotLimits(bool draw_data){
   text3->SetTextFont(52);
   text3->SetTextSize(0.05);
   text3->SetY(0.893);
-  // text3->Draw();
+  text3->Draw();
+
+  TString wiptext = "Work in Progress";
+  TLatex *text4 = new TLatex(3.5, 24, wiptext);
+  text4->SetNDC();
+  text4->SetTextAlign(13);
+  text4->SetX(0.150);
+  text4->SetTextFont(52);
+  text4->SetTextSize(0.05);
+  text4->SetY(0.830);
+  text4->Draw();
 
 
   //12) care about axes
   TH1D* h = (TH1D*)g_expected_95->GetHistogram();
   h->GetXaxis()->SetRangeUser(mass[0], mass[expected.size()-1]);
-  h->SetXTitle("M_{RSG} [GeV]");
-  h->SetYTitle("#sigma_{RSG} #times #bf{#it{#Beta}} [pb]");
+  h->SetXTitle("M_{g_{KK}} [GeV]");
+  h->SetYTitle("#sigma_{g_{KK}} #times #bf{#it{#Beta}} [pb]");
   h->GetYaxis()->SetTitleSize(0.048);
   h->GetYaxis()->SetTitleOffset(1.05);
   h->Draw("AXIS SAME");
   gPad->SetLeftMargin(0.11);
   gPad->SetRightMargin(0.035);
-  gPad->SetBottomMargin(0.11);
+  gPad->SetBottomMargin(0.12);
 
   TString outfilename = "limitplot";
   if(!draw_data) outfilename+="_blinded";
   TString outpath;
   if(AnalysisTool::do_puppi) outpath = AnalysisTool::base_path_puppi + "/NOMINAL/Plots/";
   else outpath = AnalysisTool::base_path_chs + "/NOMINAL/Plots/";
+  outpath = AnalysisTool::dnn_path_puppi + "/NOMINAL/Plots/";
   outpath += outfilename;
   c->SaveAs(outpath + ".eps");
   c->SaveAs(outpath + ".pdf");

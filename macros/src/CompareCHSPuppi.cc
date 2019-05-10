@@ -34,17 +34,27 @@ void AnalysisTool::CompareCHSPuppi(){
   samplemap["DYJets"] = "uhh2.AnalysisModuleRunner.MC.DYJets.root";
   samplemap["SingleTop"] = "uhh2.AnalysisModuleRunner.MC.ST.root";
   samplemap["QCD"] = "uhh2.AnalysisModuleRunner.MC.QCD_Mu.root";
+  samplemap["RSGluon_M1000"] = "uhh2.AnalysisModuleRunner.MC.RSGluon_M1000.root";
+  samplemap["RSGluon_M2000"] = "uhh2.AnalysisModuleRunner.MC.RSGluon_M2000.root";
+  samplemap["RSGluon_M3000"] = "uhh2.AnalysisModuleRunner.MC.RSGluon_M3000.root";
+  samplemap["RSGluon_M4000"] = "uhh2.AnalysisModuleRunner.MC.RSGluon_M4000.root";
+  samplemap["RSGluon_M5000"] = "uhh2.AnalysisModuleRunner.MC.RSGluon_M5000.root";
 
   TString chsdir = AnalysisTool::base_path_chs + "/NOMINAL/";
   TString puppidir = AnalysisTool::base_path_puppi + "/NOMINAL/";
   TString outdir = puppidir + "Plots/SingleEPS/";
 
-  DoComparison(chsdir, puppidir, outdir, samplemap, "Data");
-  DoComparison(chsdir, puppidir, outdir, samplemap, "TTbar");
-  DoComparison(chsdir, puppidir, outdir, samplemap, "WJets");
-  DoComparison(chsdir, puppidir, outdir, samplemap, "DYJets");
-  DoComparison(chsdir, puppidir, outdir, samplemap, "SingleTop");
-  DoComparison(chsdir, puppidir, outdir, samplemap, "QCD");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "Data");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "TTbar");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "WJets");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "DYJets");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "SingleTop");
+  // DoComparison(chsdir, puppidir, outdir, samplemap, "QCD");
+  DoComparison(chsdir, puppidir, outdir, samplemap, "RSGluon_M1000");
+  DoComparison(chsdir, puppidir, outdir, samplemap, "RSGluon_M2000");
+  DoComparison(chsdir, puppidir, outdir, samplemap, "RSGluon_M3000");
+  DoComparison(chsdir, puppidir, outdir, samplemap, "RSGluon_M4000");
+  DoComparison(chsdir, puppidir, outdir, samplemap, "RSGluon_M5000");
 
 }
 
